@@ -22,7 +22,7 @@ MSSQL
 ###### Библиотеки
 ```
 Beautiful Soup
-Requests
+Selenium
 ```
 ###### Прочее
 ```
