@@ -1,0 +1,15 @@
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\Multicriteria-model.exe.config
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\Multicriteria-model.exe
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\Multicriteria-model.pdb
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\Multicriteria-model.csproj.AssemblyReference.cache
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\MainWindow.g.cs
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\App.g.cs
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\Multicriteria-model_MarkupCompile.cache
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\Multicriteria-model_MarkupCompile.lref
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\MainWindow.baml
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\Multicriteria-model.g.resources
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\Multicriteria_model.Properties.Resources.resources
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\Multicriteria-model.csproj.GenerateResource.cache
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\Multicriteria-model.csproj.CoreCompileInputs.cache
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\Multicriteria-model.exe
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\Multicriteria-model.pdb
