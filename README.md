@@ -26,7 +26,7 @@ SQL
 Python
 XAML
 ```
-### :desktop_computer: Платформа
+### :desktop_computer: Интерфейс
 ```
 WPF
 ```
