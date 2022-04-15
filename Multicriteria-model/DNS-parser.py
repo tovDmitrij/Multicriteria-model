@@ -47,7 +47,6 @@ def InsertIntoDataBase(items: list):
                 except:
                     requestString = f"update Videocards set Price = '{product_Price}' where Product_Name = '{product_Name}'"
                     dbcursor.execute(requestString)
-                connection.commit()
             case "Процессор":
                 product_Name = items[product][items[product].find(' ') + 1 : items[product].find('[') - 1]
                 product_Cores = items[product][items[product].find(',') + 2 : items[product].find('x') - 1]
@@ -59,7 +58,6 @@ def InsertIntoDataBase(items: list):
                 except:
                     requestString = f"update Processors set Price = '{product_Price}' where Product_Name = '{product_Name}'"
                     dbcursor.execute(requestString)
-                connection.commit()
             case "Оперативная":
                 product_Name = items[product][items[product].find(' ', items[product].find(' ') + 1) : items[product].find('[') - 1]
                 product_Memory = items[product][items[product].find('[D') - 6 :  items[product].find("ГБ") - 1].replace(' ', '')
@@ -71,7 +69,6 @@ def InsertIntoDataBase(items: list):
                 except:
                     requestString = f"update RAM set Price = '{product_Price}' where Product_Name = '{product_Name}'"
                     dbcursor.execute(requestString)
-                connection.commit()
         goodsType = items[product][items[product].find('"') + 2 : items[product].find('р') + 1 ]
         if(goodsType == "Монитор"):
                 product_Name = items[product][items[product].find('р') + 2 : items[product].find('[') - 1]
@@ -79,65 +76,26 @@ def InsertIntoDataBase(items: list):
                 product_Frequency = items[product][items[product].find('@') + 1 : items[product].find('Гц') - 1]
                 product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')]
                 requestString = f"insert into Monitors(Product_Name, ScreenSize, Frequency, Price) values('{product_Name}', '{product_ScreenSize}', '{product_Frequency}', '{product_Price}')"
+                try:
+                    dbcursor.execute(requestString)
+                except:
+                    requestString = f"update Monitors set Price = '{product_Price}' where Product_Name = '{product_Name}'"
+                    dbcursor.execute(requestString)
         goodsType = items[product][items[product].find('Б') + 2 : items[product].find('ск') + 2]
         if(goodsType == "Жесткий диск"):
-                product_Name = items[product][
-                    items[product].find('ск') + 2
-                    :
-                    items[product].find('[') - 2
-                ]
-                
-
-# 23.8" Монитор Dell S2421HN белый [1920x1080@75 Гц, IPS, 4 мс, 1000 : 1, 250 Кд/м², 178°/178°, HDMI, AMD FreeSync] 16 499 ₽
-# 27" Монитор MSI Optix G27C4 черный [1920x1080@165 Гц, VA, 1 мс, 3000 : 1, 250 Кд/м², 178°/178°, DisplayPort, HDMI, изогнутый, AMD FreeSync Premium] 23 999 ₽
-# 24.5" Монитор Dell S2522HG черный [1920x1080@240 Гц, IPS, 1 мс, 1000 : 1, 400 Кд/м², 178°/178°, HDMI x2, DisplayPort, USB х2 шт, AMD FreeSync Premium, NVIDIA G-SYNC Compatible] 27 999 ₽
-# 23.6" Монитор ASUS TUF Gaming VG24VQE черный [1920x1080@165 Гц, VA, 1 мс, 3000 : 1, 250 Кд/м², 178°/178°, DisplayPort, HDMI, изогнутый, AMD FreeSync Premium] 19 999 ₽
-# 27" Монитор HP 27mq черный [2560x1440@60 Гц, IPS, 5 мс, 1000 : 1, 300 Кд/м², 178°/178°, HDMI, VGA (D-Sub)] 23 999 ₽
-# 31.5" Монитор Samsung U32J590UQI черный [3840x2160@60 Гц, VA, 4 мс, 3000 : 1, 270 Кд/м², 178°/178°, DisplayPort, HDMI, AMD FreeSync] 33 499 ₽
-
-# 0.5 ТБ Жесткий диск WD Black [WD5000LPSX] [SATA III, 7200 rpm, кэш память - 64 МБ] 4 199 ₽
-# 0.5 ТБ Жесткий диск WD Blue [WD5000LPZX] [SATA III, 5400 rpm, 150 Мбайт/сек, кэш память - 128 МБ] 3 499 ₽
-# 500 ГБ Жесткий диск Seagate BarraCuda [ST500LM030] [SATA III, 5400 rpm, 140 Мбайт/с, кэш память - 128 Мб] 3 299 ₽
-# 500 ГБ Жесткий диск Seagate BarraCuda Pro [ST500LM034] [SATA III, 7200 rpm, 160 Мбайт/с, кэш память - 128 Мб] 4 599 ₽
-# 1 ТБ Жесткий диск Seagate BarraCuda Pro [ST1000LM049] [SATA III, 7200 rpm, 160 Мбайт/сек, кэш память - 128 МБ] 7 999 ₽
-# 500 ГБ Жесткий диск Toshiba L200 Slim [HDWK105UZSVA] [SATA III, 5400 rpm, кэш память - 8 Мб] 3 499 ₽
-
-# currentData = {
-#     "Processor": {
-#     "Name": product_Name,
-#     "Species": {
-#         "Core": product_Cores,
-#         "Frequency": product_Frequency
-#     },
-#     "Price": product_Price
-#     }
-# }
-# data.append(currentData)
-# with open("data_file.json", "w") as write_file:
-#     json.dump(data, write_file)
-
-
-
-# name = 'Видеокарты'
-# items = GetProducts(name)
-# InsertIntoDataBase(items)
-
-# name = 'Процессоры'
-# items = GetProducts(name)
-# InsertIntoDataBase(items)
-
-# name = 'Оперативная память'
-# items = GetProducts(name)
-# InsertIntoDataBase(items)
-
-# name = 'Монитор'
-# items = GetProducts(name)
-# InsertIntoDataBase(items)
-
-name = 'Жесткий диск'
+                product_Name = items[product][items[product].find('ск') + 2 : items[product].find('[') - 2]
+                product_Memory = items[product][0 : items[product].find(' ') - 1]
+                product_Speed = items[product][items[product].rfind(',', items[product].find('rpm')) + 2 : items[product].find('rpm') - 2]
+                product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')]
+                try:
+                    dbcursor.execute(requestString)
+                except:
+                    requestString = f"update RAM set Price = '{product_Price}' where Product_Name = '{product_Name}'"
+                    dbcursor.execute(requestString)
+        connection.commit()
+name = input()
 items = GetProducts(name)
 InsertIntoDataBase(items)
-
 for item in items:
     print(item)
 print(f"\n\nКол-во товаров: {len(items)}")
