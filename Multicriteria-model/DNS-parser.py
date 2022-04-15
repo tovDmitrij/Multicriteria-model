@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import time
 import pyodbc
-webdriver = webdriver.Chrome("C:/Users/Дмитрий/Desktop/Multicriteria-model/Multicriteria-model/chromedriver.exe")
+webdriver = webdriver.Chrome("chromedriver.exe")
 
 def GetProducts(search: str) -> list:
     url = f'https://www.dns-shop.ru/search/?q={search}&stock=now-today-tomorrow-later&p=1'
@@ -42,33 +42,51 @@ def InsertIntoDataBase(items: list):
                 product_Frequency = items[product][items[product].rfind(' ', 0, items[product].rfind("МГц") - 1) + 1 : items[product].rfind("МГц") - 1]
                 product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')
                 requestString = f"insert into Videocards(Product_Name, Video_memory, Frequency, Price) values('{product_Name}', '{product_VideoMemory}', '{product_Frequency}', '{product_Price}');"
+                try:
+                    dbcursor.execute(requestString)
+                except:
+                    requestString = f"update Videocards set Price = '{product_Price}' where Product_Name = '{product_Name}'"
+                    dbcursor.execute(requestString)
+                connection.commit()
             case "Процессор":
                 product_Name = items[product][items[product].find(' ') + 1 : items[product].find('[') - 1]
                 product_Cores = items[product][items[product].find(',') + 2 : items[product].find('x') - 1]
                 product_Frequency = items[product][items[product].find('x') + 2 : items[product].find("ГГц") - 1]
                 product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')
                 requestString = f"insert into Processors(Product_Name, Cores, Frequency, Price) values('{product_Name}', '{product_Cores}', '{product_Frequency}', '{product_Price}');"
+                try:
+                    dbcursor.execute(requestString)
+                except:
+                    requestString = f"update Processors set Price = '{product_Price}' where Product_Name = '{product_Name}'"
+                    dbcursor.execute(requestString)
+                connection.commit()
             case "Оперативная":
                 product_Name = items[product][items[product].find(' ', items[product].find(' ') + 1) : items[product].find('[') - 1]
                 product_Memory = items[product][items[product].find('[D') - 6 :  items[product].find("ГБ") - 1].replace(' ', '')
                 product_Frequency = items[product][items[product].find('шт,') + 4 : items[product].find('МГц') - 1]
                 product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')
                 requestString = f"insert into RAM(Product_Name, Memory, Frequency, Price) values('{product_Name}', '{product_Memory}', '{product_Frequency}', '{product_Price}');"
+                try:
+                    dbcursor.execute(requestString)
+                except:
+                    requestString = f"update RAM set Price = '{product_Price}' where Product_Name = '{product_Name}'"
+                    dbcursor.execute(requestString)
+                connection.commit()
         goodsType = items[product][items[product].find('"') + 2 : items[product].find('р') + 1 ]
         if(goodsType == "Монитор"):
-                product_Name = ...
-                product_ScreenSize = ...
-                product_Frequency = ...
-                product_Price = ...
-                requestString = ...
+                product_Name = items[product][items[product].find('р') + 2 : items[product].find('[') - 1]
+                product_ScreenSize = items[product][items[product].find('[') + 1 : items[product].find('@') - 1]
+                product_Frequency = items[product][items[product].find('@') + 1 : items[product].find('Гц') - 1]
+                product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')]
+                requestString = f"insert into Monitors(Product_Name, ScreenSize, Frequency, Price) values('{product_Name}', '{product_ScreenSize}', '{product_Frequency}', '{product_Price}')"
         goodsType = items[product][items[product].find('Б') + 2 : items[product].find('ск') + 2]
         if(goodsType == "Жесткий диск"):
-                print("do sth...")
-        try:
-            dbcursor.execute(requestString)
-            connection.commit()
-        except:
-            continue;
+                product_Name = items[product][
+                    items[product].find('ск') + 2
+                    :
+                    items[product].find('[') - 2
+                ]
+                
 
 # 23.8" Монитор Dell S2421HN белый [1920x1080@75 Гц, IPS, 4 мс, 1000 : 1, 250 Кд/м², 178°/178°, HDMI, AMD FreeSync] 16 499 ₽
 # 27" Монитор MSI Optix G27C4 черный [1920x1080@165 Гц, VA, 1 мс, 3000 : 1, 250 Кд/м², 178°/178°, DisplayPort, HDMI, изогнутый, AMD FreeSync Premium] 23 999 ₽
