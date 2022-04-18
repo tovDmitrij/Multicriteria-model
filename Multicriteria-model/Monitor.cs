@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Multicriteria_model
 {
-    class Monitor: Product, IComparable<Monitor>
+    class Monitor: Product, IComparable<Monitor>, IScreenSize, IFrequency
     {
         private readonly string name;
         private readonly uint screenSize_X;
@@ -15,7 +15,7 @@ namespace Multicriteria_model
         private readonly uint price;
         public override string Name => name;
         public string ScreenSize => $"{screenSize_X}x{screenSize_Y}";
-        public uint Frequency => frequency;
+        public double Frequency => frequency;
         public override uint Price => price;
         public Monitor(string name, string screenSize, uint frequency, uint price)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Multicriteria_model
 {
-    class Videocard: Product
+    class Videocard: Product, IMemory, IFrequency
     {
         private readonly string name;
         private readonly uint videoMemory;
@@ -14,7 +14,7 @@ namespace Multicriteria_model
         private readonly uint price;
         public override string Name => name;
         public uint Memory => videoMemory;
-        public uint Frequency => frequency;
+        public double Frequency => frequency;
         public override uint Price => price;
         public Videocard(string name, uint videoMemory, uint frequency, uint price)
         {

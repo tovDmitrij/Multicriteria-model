@@ -27,6 +27,12 @@ namespace Multicriteria_model
         List<List<string>> list = new List<List<string>>();
         void Foo()
         {
+            Product m1 = new Monitor("Acer Nitro EI292CURPbmiipx черный", "2560x1080", 100, 25999);
+            Product m2 = new Monitor("Acer Nitro VG252QPbmiipx черный", "1920x1080", 144, 20999);
+            if (m1 is Monitor product1 && m2 is Monitor product2)
+                if (product1.CompareTo(product2) == 0)
+                    return;
+
             string sql = "select* from HDD";
             sqlConnection.Open();
             SqlCommand cmd = new SqlCommand(sql, sqlConnection);

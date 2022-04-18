@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Multicriteria_model
 {
-    class Processor: Product
+    class Processor: Product, ICores, IFrequency
     {
         private readonly string name;
         private readonly uint cores;

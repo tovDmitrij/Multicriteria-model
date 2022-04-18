@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Multicriteria_model
 {
-    class RAM: Product
+    class RAM: Product, IMemory, IFrequency
     {
         private readonly string name;
         private readonly uint memory;
@@ -14,7 +14,7 @@ namespace Multicriteria_model
         private readonly uint price;
         public override string Name => name;
         public uint Memory => memory;
-        public uint Frequency => frequency;
+        public double Frequency => frequency;
         public override uint Price => price;
         public RAM(string name, uint memory, uint frequency, uint price)
         {

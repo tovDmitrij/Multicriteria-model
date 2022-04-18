@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Multicriteria_model
 {
-    class HDD: Product
+    class HDD: Product, IMemory, ISpeed
     {
         private readonly string name;
         private readonly uint memory;
