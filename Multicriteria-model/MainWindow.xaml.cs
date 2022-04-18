@@ -12,18 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
 
 namespace Multicriteria_model
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-R2N8P3B;Initial Catalog=DB_Goods;Integrated Security=True");
         public MainWindow()
         {
             InitializeComponent();
-            Console.WriteLine("HelloWorld!");
+            Foo();
+        }
+        List<List<string>> list = new List<List<string>>();
+        void Foo()
+        {
+            string sql = "select* from HDD";
+            sqlConnection.Open();
+            SqlCommand cmd = new SqlCommand(sql, sqlConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+                list.Add(new List<string>() { $"{reader.GetValue(0)}", $"{reader.GetValue(1)}" });
         }
     }
 }

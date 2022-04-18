@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Release\
 Multicriteria_model
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\App.xaml
 11151548125
 
@@ -16,5 +16,5 @@ C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\App.xaml
 13152784993
 MainWindow.xaml;
 
-False
+True
 

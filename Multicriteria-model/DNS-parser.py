@@ -1,3 +1,4 @@
+from math import prod
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import time
@@ -72,10 +73,10 @@ def InsertIntoDataBase(items: list):
         goodsType = items[product][items[product].find('"') + 2 : items[product].find('р') + 1 ]
         if(goodsType == "Монитор"):
                 product_Name = items[product][items[product].find('р') + 2 : items[product].find('[') - 1]
-                product_ScreenSize = items[product][items[product].find('[') + 1 : items[product].find('@') - 1]
+                product_ScreenSize = items[product][items[product].find('[') + 1 : items[product].find('@')]
                 product_Frequency = items[product][items[product].find('@') + 1 : items[product].find('Гц') - 1]
-                product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')]
-                requestString = f"insert into Monitors(Product_Name, ScreenSize, Frequency, Price) values('{product_Name}', '{product_ScreenSize}', '{product_Frequency}', '{product_Price}')"
+                product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')
+                requestString = f"insert into Monitors(Product_Name, ScreenSize, Frequency, Price) values('{product_Name}', '{product_ScreenSize}', '{product_Frequency}', '{product_Price}');"
                 try:
                     dbcursor.execute(requestString)
                 except:
@@ -83,17 +84,21 @@ def InsertIntoDataBase(items: list):
                     dbcursor.execute(requestString)
         goodsType = items[product][items[product].find('Б') + 2 : items[product].find('ск') + 2]
         if(goodsType == "Жесткий диск"):
-                product_Name = items[product][items[product].find('ск') + 2 : items[product].find('[') - 2]
-                product_Memory = items[product][0 : items[product].find(' ') - 1]
-                product_Speed = items[product][items[product].rfind(',', items[product].find('rpm')) + 2 : items[product].find('rpm') - 2]
-                product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')]
+                product_Name = items[product][items[product].find('ск') + 2 : items[product].find('[') - 1]
+                product_Memory = items[product][0 : items[product].find(' ')]
+                if(float(product_Memory) < 20):
+                    product_Memory = float(product_Memory) * 1024
+                # product_Speed = items[product][items[product].find('бит/с') + 7 : items[product].find('об/мин') - 1]
+                product_Speed = items[product][items[product].find('III') + 5 : items[product].find('rpm') - 1]
+                product_Price = items[product][items[product].rfind(']') + 2 : items[product].find('₽') - 1].replace(' ', '')
+                requestString = f"insert into HDD(Product_Name, Memory, Speed, Price) values('{product_Name}', '{product_Memory}', '{product_Speed}', '{product_Price}');"
                 try:
                     dbcursor.execute(requestString)
                 except:
-                    requestString = f"update RAM set Price = '{product_Price}' where Product_Name = '{product_Name}'"
+                    requestString = f"update HDD set Price = '{product_Price}' where Product_Name = '{product_Name}'"
                     dbcursor.execute(requestString)
         connection.commit()
-name = input()
+name = input("Введите тип товара: ")
 items = GetProducts(name)
 InsertIntoDataBase(items)
 for item in items:
