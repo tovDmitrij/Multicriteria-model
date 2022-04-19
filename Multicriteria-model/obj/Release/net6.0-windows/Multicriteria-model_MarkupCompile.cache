@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Release\net6.0-windows\
 Multicriteria_model
 none
 false
-TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\App.xaml
 11407045341
 
-131951152049
+13-1968824497
 1951745643267
 MainWindow.xaml;
 
-False
+True
 

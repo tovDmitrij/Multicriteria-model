@@ -8,8 +8,8 @@ namespace Multicriteria_model
     class Lexicographic<T> where T : Product
     {
         private readonly List<T> products;
-        private readonly Dictionary<byte, Сharacteristics> criteria;
-        public Lexicographic(List<T> products, Dictionary<byte, Сharacteristics> criteria)
+        private readonly Dictionary<byte, Characteristics> criteria;
+        public Lexicographic(List<T> products, Dictionary<byte, Characteristics> criteria)
         {
             this.products = products;
             this.criteria = criteria;
@@ -24,16 +24,16 @@ namespace Multicriteria_model
                         List<HDD> HDDList = products as List<HDD>;
                         for (byte i = 1; i <= criteria.Count; i++)
                         {
-                            Сharacteristics currentCriteria = criteria[i];
+                            Characteristics currentCriteria = criteria[i];
                             switch (currentCriteria)
                             {
-                                case Сharacteristics.Price:
+                                case Characteristics.Price:
                                     HDDList = HDDList.FindAll(productX => productX.Price == HDDList.Min(productY => productY.Price));
                                     break;
-                                case Сharacteristics.Speed:
+                                case Characteristics.Speed:
                                     HDDList = HDDList.FindAll(productX => productX.Speed == HDDList.Max(productY => productY.Speed));
                                     break;
-                                case Сharacteristics.Memory:
+                                case Characteristics.Memory:
                                     HDDList = HDDList.FindAll(productX => productX.Memory == HDDList.Max(productY => productY.Memory));
                                     break;
                             }
@@ -51,16 +51,16 @@ namespace Multicriteria_model
                         List <Videocard> VideocardList = products as List<Videocard>;
                         for (byte i = 1; i <= criteria.Count; i++)
                         {
-                            Сharacteristics currentCriteria = criteria[i];
+                            Characteristics currentCriteria = criteria[i];
                             switch (currentCriteria)
                             {
-                                case Сharacteristics.Price:
+                                case Characteristics.Price:
                                     VideocardList = VideocardList.FindAll(productX => productX.Price == VideocardList.Min(productY => productY.Price));
                                     break;
-                                case Сharacteristics.Frequency:
+                                case Characteristics.Frequency:
                                     VideocardList = VideocardList.FindAll(productX => productX.Frequency == VideocardList.Max(productY => productY.Frequency));
                                     break;
-                                case Сharacteristics.Memory:
+                                case Characteristics.Memory:
                                     VideocardList = VideocardList.FindAll(productX => productX.Memory == VideocardList.Max(productY => productY.Memory));
                                     break;
                             }
@@ -78,16 +78,16 @@ namespace Multicriteria_model
                         List<RAM> RAMList = products as List<RAM>;
                         for (byte i = 1; i <= criteria.Count; i++)
                         {
-                            Сharacteristics currentCriteria = criteria[i];
+                            Characteristics currentCriteria = criteria[i];
                             switch (currentCriteria)
                             {
-                                case Сharacteristics.Price:
+                                case Characteristics.Price:
                                     RAMList = RAMList.FindAll(productX => productX.Price == RAMList.Min(productY => productY.Price));
                                     break;
-                                case Сharacteristics.Frequency:
+                                case Characteristics.Frequency:
                                     RAMList = RAMList.FindAll(productX => productX.Frequency == RAMList.Max(productY => productY.Frequency));
                                     break;
-                                case Сharacteristics.Memory:
+                                case Characteristics.Memory:
                                     RAMList = RAMList.FindAll(productX => productX.Memory == RAMList.Max(productY => productY.Memory));
                                     break;
                             }
@@ -105,16 +105,16 @@ namespace Multicriteria_model
                         List<Processor> ProcessorList = products as List<Processor>;
                         for (byte i = 1; i <= criteria.Count; i++)
                         {
-                            Сharacteristics currentCriteria = criteria[i];
+                            Characteristics currentCriteria = criteria[i];
                             switch (currentCriteria)
                             {
-                                case Сharacteristics.Price:
+                                case Characteristics.Price:
                                     ProcessorList = ProcessorList.FindAll(productX => productX.Price == ProcessorList.Min(productY => productY.Price));
                                     break;
-                                case Сharacteristics.Frequency:
+                                case Characteristics.Frequency:
                                     ProcessorList = ProcessorList.FindAll(productX => productX.Frequency == ProcessorList.Max(productY => productY.Frequency));
                                     break;
-                                case Сharacteristics.Cores:
+                                case Characteristics.Cores:
                                     ProcessorList = ProcessorList.FindAll(productX => productX.Cores == ProcessorList.Max(productY => productY.Cores));
                                     break;
                             }
@@ -132,16 +132,16 @@ namespace Multicriteria_model
                         List<Monitor> MonitorList = products as List<Monitor>;
                         for (byte i = 1; i <= criteria.Count; i++)
                         {
-                            Сharacteristics currentCriteria = criteria[i];
+                            Characteristics currentCriteria = criteria[i];
                             switch (currentCriteria)
                             {
-                                case Сharacteristics.Price:
+                                case Characteristics.Price:
                                     MonitorList = MonitorList.FindAll(productX => productX.Price == MonitorList.Min(productY => productY.Price));
                                     break;
-                                case Сharacteristics.Frequency:
+                                case Characteristics.Frequency:
                                     MonitorList = MonitorList.FindAll(productX => productX.Frequency == MonitorList.Max(productY => productY.Frequency));
                                     break;
-                                case Сharacteristics.ScreenSize:
+                                case Characteristics.ScreenSize:
                                     MonitorList = MonitorList.FindAll(productX => productX.ScreenSize == MonitorList.Max(productY => productY.ScreenSize));
                                     break;
                             }

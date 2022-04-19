@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Multicriteria_model
 {
-    enum Сharacteristics { Price, Speed, Memory, Frequency, Cores, ScreenSize }
+    enum Characteristics { Price, Speed, Memory, Frequency, Cores, ScreenSize }
 }
