@@ -24,21 +24,42 @@ namespace Multicriteria_model
             InitializeComponent();
             Foo();
         }
-        List<List<string>> list = new List<List<string>>();
         void Foo()
         {
-            Product m1 = new Monitor("Acer Nitro EI292CURPbmiipx черный", "2560x1080", 100, 25999);
-            Product m2 = new Monitor("Acer Nitro VG252QPbmiipx черный", "1920x1080", 144, 20999);
-            if (m1 is Monitor product1 && m2 is Monitor product2)
-                if (product1.CompareTo(product2) == 0)
-                    return;
-
-            string sql = "select* from HDD";
+            //string sql = "select* from HDD";
+            string sql = "select* from Videocards";
             sqlConnection.Open();
             SqlCommand cmd = new SqlCommand(sql, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
-            while(reader.Read())
-                list.Add(new List<string>() { $"{reader.GetValue(0)}", $"{reader.GetValue(1)}" });
+            List<List<string>> list = new List<List<string>>();
+            while (reader.Read())
+                list.Add(new List<string>() { $"{reader.GetValue(0)}", $"{reader.GetValue(1)}", $"{reader.GetValue(2)}", $"{reader.GetValue(3)}" });
+
+            //List<HDD> pr = new List<HDD>();
+            //foreach(var k in list)
+            //{
+            //    pr.Add(new HDD(k[0], Convert.ToUInt32(k[1]), Convert.ToUInt32(k[2]), Convert.ToUInt32(k[3])));
+            //}
+
+            List<Videocard> pr = new List<Videocard>();
+            foreach (var k in list)
+            {
+                pr.Add(new Videocard(k[0], Convert.ToUInt32(k[1]), Convert.ToUInt32(k[2]), Convert.ToUInt32(k[3])));
+            }
+
+
+
+
+            Dictionary<byte, Сharacteristics> ddd = new Dictionary<byte, Сharacteristics>();
+            //ddd.Add(1, Сharacteristics.Price);
+            //ddd.Add(2, Сharacteristics.Speed);
+            //ddd.Add(3, Сharacteristics.Memory);
+            ddd.Add(1, Сharacteristics.Memory);
+            ddd.Add(2, Сharacteristics.Frequency);
+            ddd.Add(3, Сharacteristics.Price);
+
+            Lexicographic<Videocard> lx = new Lexicographic<Videocard>(pr, ddd);
+            lx.Run();
         }
     }
 }
