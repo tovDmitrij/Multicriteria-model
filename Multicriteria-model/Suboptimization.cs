@@ -4,12 +4,19 @@ using System.Linq;
 using System.Windows;
 namespace Multicriteria_model
 {
+/* Субоптимизация
+
+Выделяется один из критериев, а по всем остальным критериям назначаются нижние границы.
+Оптимальным при этом считается исход, максимизирующий выделенный критерий на множестве исходов,
+оценки которых по остальным притерием не ниже назначенных.
+
+*/
     class Suboptimization<T> where T : Product
     {
         private readonly List<T> products;
-        private readonly SortedDictionary<KeyValuePair<double, double>, Characteristics> criteria;
+        private readonly SortedDictionary<double, Characteristics> criteria;
         private readonly Characteristics mainCriterion;
-        public Suboptimization(List<T> products, Characteristics mainCriterion, SortedDictionary<KeyValuePair<double, double>, Characteristics> criteria)
+        public Suboptimization(List<T> products, Characteristics mainCriterion, SortedDictionary<double, Characteristics> criteria)
         {
             this.products = products;
             this.mainCriterion = mainCriterion;
@@ -27,17 +34,17 @@ namespace Multicriteria_model
                         for (int i = 0; i < criteria.Count; i++)
                         {
                             Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                            KeyValuePair<double, double> range = criteria.ElementAt(i).Key;
+                            double border = criteria.ElementAt(i).Key;
                             switch (currentCriteria)
                             {
                                 case Characteristics.Price:
-                                    HDDList = HDDList.FindAll(productX => productX.Price >= range.Key && productX.Price <= range.Value);
+                                    HDDList = HDDList.FindAll(productX => productX.Price <= border);
                                     break;
                                 case Characteristics.Speed:
-                                    HDDList = HDDList.FindAll(productX => productX.Speed >= range.Key && productX.Speed <= range.Value);
+                                    HDDList = HDDList.FindAll(productX => productX.Speed >= border);
                                     break;
                                 case Characteristics.Memory:
-                                    HDDList = HDDList.FindAll(productX => productX.Memory >= range.Key && productX.Memory <= range.Value);
+                                    HDDList = HDDList.FindAll(productX => productX.Memory >= border);
                                     break;
                             }
                         }
@@ -62,17 +69,17 @@ namespace Multicriteria_model
                         for (int i = 0; i < criteria.Count; i++)
                         {
                             Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                            KeyValuePair<double, double> range = criteria.ElementAt(i).Key;
+                            double border = criteria.ElementAt(i).Key;
                             switch (currentCriteria)
                             {
                                 case Characteristics.Price:
-                                    RAMList = RAMList.FindAll(productX => productX.Price >= range.Key && productX.Price <= range.Value);
+                                    RAMList = RAMList.FindAll(productX => productX.Price <= border);
                                     break;
                                 case Characteristics.Memory:
-                                    RAMList = RAMList.FindAll(productX => productX.Memory >= range.Key && productX.Memory <= range.Value);
+                                    RAMList = RAMList.FindAll(productX => productX.Memory >= border);
                                     break;
                                 case Characteristics.Frequency:
-                                    RAMList = RAMList.FindAll(productX => productX.Frequency >= range.Key && productX.Frequency <= range.Value);
+                                    RAMList = RAMList.FindAll(productX => productX.Frequency >= border);
                                     break;
                             }
                         }
@@ -132,17 +139,17 @@ namespace Multicriteria_model
                         for (int i = 0; i < criteria.Count; i++)
                         {
                             Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                            KeyValuePair<double, double> range = criteria.ElementAt(i).Key;
+                            double border = criteria.ElementAt(i).Key;
                             switch (currentCriteria)
                             {
                                 case Characteristics.Price:
-                                    ProcessorList = ProcessorList.FindAll(productX => productX.Price >= range.Key && productX.Price <= range.Value);
+                                    ProcessorList = ProcessorList.FindAll(productX => productX.Price <= border);
                                     break;
                                 case Characteristics.Cores:
-                                    ProcessorList = ProcessorList.FindAll(productX => productX.Cores >= range.Key && productX.Cores <= range.Value);
+                                    ProcessorList = ProcessorList.FindAll(productX => productX.Cores >= border);
                                     break;
                                 case Characteristics.Frequency:
-                                    ProcessorList = ProcessorList.FindAll(productX => productX.Frequency >= range.Key && productX.Frequency <= range.Value);
+                                    ProcessorList = ProcessorList.FindAll(productX => productX.Frequency >= border);
                                     break;
                             }
                         }
@@ -167,17 +174,17 @@ namespace Multicriteria_model
                         for (int i = 0; i < criteria.Count; i++)
                         {
                             Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                            KeyValuePair<double, double> range = criteria.ElementAt(i).Key;
+                            double border = criteria.ElementAt(i).Key;
                             switch (currentCriteria)
                             {
                                 case Characteristics.Price:
-                                    MonitorList = MonitorList.FindAll(productX => productX.Price >= range.Key && productX.Price <= range.Value);
+                                    MonitorList = MonitorList.FindAll(productX => productX.Price <= border);
                                     break;
                                 case Characteristics.ScreenSize:
-                                    MonitorList = MonitorList.FindAll(productX => productX.ScreenSize >= range.Key && productX.ScreenSize <= range.Value);
+                                    MonitorList = MonitorList.FindAll(productX => productX.ScreenSize >= border);
                                     break;
                                 case Characteristics.Frequency:
-                                    MonitorList = MonitorList.FindAll(productX => productX.Frequency >= range.Key && productX.Frequency <= range.Value);
+                                    MonitorList = MonitorList.FindAll(productX => productX.Frequency >= border);
                                     break;
                             }
                         }
