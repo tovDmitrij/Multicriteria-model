@@ -14,7 +14,7 @@ namespace Multicriteria_model
         private readonly uint frequency;
         private readonly uint price;
         public override string Name => name;
-        public string ScreenSize => $"{screenSize_X}x{screenSize_Y}";
+        public uint ScreenSize => screenSize_X * screenSize_Y;
         public double Frequency => frequency;
         public override uint Price => price;
         public Monitor(string name, string screenSize, uint frequency, uint price)

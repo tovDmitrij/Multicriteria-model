@@ -10,5 +10,5 @@ namespace Multicriteria_model
     interface IFrequency { double Frequency { get; } }
     interface ISpeed { uint Speed { get; } }
     interface ICores { uint Cores { get; } }
-    interface IScreenSize { string ScreenSize { get; } }
+    interface IScreenSize { uint ScreenSize { get; } }
 }

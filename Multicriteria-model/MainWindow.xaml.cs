@@ -22,47 +22,59 @@ namespace Multicriteria_model
         public MainWindow()
         {
             InitializeComponent();
-            Foo();
+            Foo("HDD");
         }
-        void Foo()
+        void Foo(string productType)
         {
-            string sql = "select* from HDD";
-            //string sql = "select* from Videocards";
+            string sql = $"select* from {productType}";
             sqlConnection.Open();
             SqlCommand cmd = new SqlCommand(sql, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             List<List<string>> list = new List<List<string>>();
             while (reader.Read())
                 list.Add(new List<string>() { $"{reader.GetValue(0)}", $"{reader.GetValue(1)}", $"{reader.GetValue(2)}", $"{reader.GetValue(3)}" });
-            //Имя память частота цена
-            List<HDD> pr = new List<HDD>();
-            foreach (var k in list)
+
+            SortedDictionary<byte, Characteristics> criteria = new SortedDictionary<byte, Characteristics>();
+            criteria.Add(1, Characteristics.Price);
+            criteria.Add(2, Characteristics.Speed);
+            criteria.Add(3, Characteristics.Memory);
+
+            List<HDD> products;
+            switch (productType)
             {
-                pr.Add(new HDD(k[0], Convert.ToUInt32(k[1]), Convert.ToUInt32(k[2]), Convert.ToUInt32(k[3])));
+                case "HDD":
+                    products = new List<HDD>();
+                    foreach (var k in list)
+                    {
+                        products.Add(new HDD(k[0], Convert.ToUInt32(k[1]), Convert.ToUInt32(k[2]), Convert.ToUInt32(k[3])));
+                    }
+                    Lexicographic<HDD> lx = new Lexicographic<HDD>(products, criteria);
+                    List<HDD> z = lx.Run();
+                    break;
+                //case "Videocards":
+                    //products = new List<Videocard>();
+                    //foreach (var k in list)
+                    //{
+                    //    products.Add(new Videocard(k[0], Convert.ToUInt32(k[1]), Convert.ToUInt32(k[2]), Convert.ToUInt32(k[3])));
+                    //}
+                    //break;
             }
 
-            //List<Videocard> pr = new List<Videocard>();
-            //foreach (var k in list)
-            //{
-            //    pr.Add(new Videocard(k[0], Convert.ToUInt32(k[1]), Convert.ToUInt32(k[2]), Convert.ToUInt32(k[3])));
-            //}
-
             #region Лексикографическая оптимизация
-            /*
-            Dictionary<byte, Characteristics> ddd = new Dictionary<byte, Characteristics>();
-            ddd.Add(1, Сharacteristics.Price);
-            ddd.Add(2, Сharacteristics.Speed);
-            ddd.Add(3, Сharacteristics.Memory);
-            Lexicographic<Videocard> lx = new Lexicographic<Videocard>(pr, ddd);
-            lx.Run();
-            */
+            //SortedDictionary<byte, Characteristics> criteria = new SortedDictionary<byte, Characteristics>();
+            //criteria.Add(1, Characteristics.Price);
+            //criteria.Add(2, Characteristics.Speed);
+            //criteria.Add(3, Characteristics.Memory);
+            //Lexicographic<HDD> lx = new Lexicographic<HDD>(products, criteria);
+            //List<HDD> z = lx.Run();
             #endregion
 
             #region Субоптимизация
-            Dictionary<KeyValuePair<double, double>, Characteristics> ddd = new Dictionary<KeyValuePair<double, double>, Characteristics>();
-            ddd.Add(new KeyValuePair<double, double>(2048, 4096), Characteristics.Memory);
-            Suboptimization<HDD> sb = new Suboptimization<HDD>(pr, Characteristics.Price, ddd);
-            sb.Run();
+            //SortedDictionary<KeyValuePair<double, double>, Characteristics> ddd = new SortedDictionary<KeyValuePair<double, double>, Characteristics>();
+            //ddd.Add(new KeyValuePair<double, double>(2048, 4096), Characteristics.Memory);
+            //ddd.Add(new KeyValuePair<double, double>(2048, 4096), Characteristics.Memory);
+            //Suboptimization<HDD> sb = new Suboptimization<HDD>(pr, Characteristics.Price, ddd);
+            //sb.Run();
             #endregion
         }
     }
