@@ -12,7 +12,6 @@ namespace Multicriteria_model
     class GeneralizedCriterion<T> where T : Product
     {
         private readonly List<T> products;
-
         public GeneralizedCriterion(List<T> products)
         {
             this.products = products;

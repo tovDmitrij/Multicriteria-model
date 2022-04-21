@@ -28,11 +28,8 @@ namespace Multicriteria_model
         }
         public int CompareTo(Monitor other)
         {
-            return screenSize_X * screenSize_Y < other.screenSize_X * other.screenSize_Y ? -1
-                :
-                screenSize_X * screenSize_Y > other.screenSize_X * other.screenSize_Y ? 1
-                :
-                0;
+            return screenSize_X * screenSize_Y < other.screenSize_X * other.screenSize_Y ? -1 :
+                screenSize_X * screenSize_Y > other.screenSize_X * other.screenSize_Y ? 1 : 0;
         }
     }
 }
