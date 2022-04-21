@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 namespace Multicriteria_model
 {
-/* Субоптимизация
+    /* Субоптимизация
 
-Выделяется один из критериев, а по всем остальным критериям назначаются нижние границы.
-Оптимальным при этом считается исход, максимизирующий выделенный критерий на множестве исходов,
-оценки которых по остальным притерием не ниже назначенных.
+    Выделяется один из критериев, а по всем остальным критериям назначаются нижние границы.
+    Оптимальным при этом считается исход, максимизирующий выделенный критерий на множестве исходов,
+    оценки которых по остальным притерием не ниже назначенных.
 
-*/
+    */
     class Suboptimization<T> where T : Product
     {
         private readonly List<T> products;
@@ -22,196 +20,71 @@ namespace Multicriteria_model
             this.mainCriterion = mainCriterion;
             this.criteria = criteria;
         }
-        public List<T>? Run()
+        public List<T> Run()
         {
-            try
+            List<T> productList = products;
+            for (byte i = 0; i < criteria.Count; i++)
             {
-                switch (products)
+                Characteristics currentCriteria = criteria.ElementAt(i).Value;
+                double border = criteria.ElementAt(i).Key;
+                switch (currentCriteria)
                 {
-                    #region Жесткие диски
-                    case List<HDD>:
-                        List<HDD> HDDList = products as List<HDD>;
-                        for (int i = 0; i < criteria.Count; i++)
-                        {
-                            Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                            double border = criteria.ElementAt(i).Key;
-                            switch (currentCriteria)
-                            {
-                                case Characteristics.Price:
-                                    HDDList = HDDList.FindAll(productX => productX.Price <= border);
-                                    break;
-                                case Characteristics.Speed:
-                                    HDDList = HDDList.FindAll(productX => productX.Speed >= border);
-                                    break;
-                                case Characteristics.Memory:
-                                    HDDList = HDDList.FindAll(productX => productX.Memory >= border);
-                                    break;
-                            }
-                        }
-                        switch (mainCriterion)
-                        {
-                            case Characteristics.Price:
-                                HDDList = HDDList.FindAll(productX => productX.Price == HDDList.Min(productY => productY.Price));
-                                break;
-                            case Characteristics.Speed:
-                                HDDList = HDDList.FindAll(productX => productX.Speed == HDDList.Max(productY => productY.Speed));
-                                break;
-                            case Characteristics.Memory:
-                                HDDList = HDDList.FindAll(productX => productX.Memory == HDDList.Max(productY => productY.Memory));
-                                break;
-                        }
-                        return HDDList as List<T>;
-                    #endregion
-
-                    #region Оперативная память
-                    case List<RAM>:
-                        List<RAM> RAMList = products as List<RAM>;
-                        for (int i = 0; i < criteria.Count; i++)
-                        {
-                            Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                            double border = criteria.ElementAt(i).Key;
-                            switch (currentCriteria)
-                            {
-                                case Characteristics.Price:
-                                    RAMList = RAMList.FindAll(productX => productX.Price <= border);
-                                    break;
-                                case Characteristics.Memory:
-                                    RAMList = RAMList.FindAll(productX => productX.Memory >= border);
-                                    break;
-                                case Characteristics.Frequency:
-                                    RAMList = RAMList.FindAll(productX => productX.Frequency >= border);
-                                    break;
-                            }
-                        }
-                        switch (mainCriterion)
-                        {
-                            case Characteristics.Price:
-                                RAMList = RAMList.FindAll(productX => productX.Price == RAMList.Min(productY => productY.Price));
-                                break;
-                            case Characteristics.Memory:
-                                RAMList = RAMList.FindAll(productX => productX.Memory == RAMList.Max(productY => productY.Memory));
-                                break;
-                            case Characteristics.Frequency:
-                                RAMList = RAMList.FindAll(productX => productX.Frequency == RAMList.Max(productY => productY.Frequency));
-                                break;
-                        }
-                        return RAMList as List<T>;
-                    #endregion
-
-                    #region Видеокарты
-                    case List<Videocard>:
-                        List<Videocard> VCList = products as List<Videocard>;
-                        for (int i = 0; i < criteria.Count; i++)
-                        {
-                            Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                            double border = criteria.ElementAt(i).Key;
-                            switch (currentCriteria)
-                            {
-                                case Characteristics.Price:
-                                    VCList = VCList.FindAll(productX => productX.Price <= border);
-                                    break;
-                                case Characteristics.Memory:
-                                    VCList = VCList.FindAll(productX => productX.Memory >= border);
-                                    break;
-                                case Characteristics.Frequency:
-                                    VCList = VCList.FindAll(productX => productX.Frequency >= border);
-                                    break;
-                            }
-                        }
-                        switch (mainCriterion)
-                        {
-                            case Characteristics.Price:
-                                VCList = VCList.FindAll(productX => productX.Price == VCList.Min(productY => productY.Price));
-                                break;
-                            case Characteristics.Memory:
-                                VCList = VCList.FindAll(productX => productX.Memory == VCList.Max(productY => productY.Memory));
-                                break;
-                            case Characteristics.Frequency:
-                                VCList = VCList.FindAll(productX => productX.Frequency == VCList.Max(productY => productY.Frequency));
-                                break;
-                        }
-                        return VCList as List<T>;
-                    #endregion
-
-                    #region Процессоры
-                    case List<Processor>:
-                        List<Processor> ProcessorList = products as List<Processor>;
-                        for (int i = 0; i < criteria.Count; i++)
-                        {
-                            Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                            double border = criteria.ElementAt(i).Key;
-                            switch (currentCriteria)
-                            {
-                                case Characteristics.Price:
-                                    ProcessorList = ProcessorList.FindAll(productX => productX.Price <= border);
-                                    break;
-                                case Characteristics.Cores:
-                                    ProcessorList = ProcessorList.FindAll(productX => productX.Cores >= border);
-                                    break;
-                                case Characteristics.Frequency:
-                                    ProcessorList = ProcessorList.FindAll(productX => productX.Frequency >= border);
-                                    break;
-                            }
-                        }
-                        switch (mainCriterion)
-                        {
-                            case Characteristics.Price:
-                                ProcessorList = ProcessorList.FindAll(productX => productX.Price == ProcessorList.Min(productY => productY.Price));
-                                break;
-                            case Characteristics.Cores:
-                                ProcessorList = ProcessorList.FindAll(productX => productX.Cores == ProcessorList.Max(productY => productY.Cores));
-                                break;
-                            case Characteristics.Frequency:
-                                ProcessorList = ProcessorList.FindAll(productX => productX.Frequency == ProcessorList.Max(productY => productY.Frequency));
-                                break;
-                        }
-                        return ProcessorList as List<T>;
-                    #endregion
-
-                    #region Мониторы
-                    case List<Monitor>:
-                        List<Monitor> MonitorList = products as List<Monitor>;
-                        for (int i = 0; i < criteria.Count; i++)
-                        {
-                            Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                            double border = criteria.ElementAt(i).Key;
-                            switch (currentCriteria)
-                            {
-                                case Characteristics.Price:
-                                    MonitorList = MonitorList.FindAll(productX => productX.Price <= border);
-                                    break;
-                                case Characteristics.ScreenSize:
-                                    MonitorList = MonitorList.FindAll(productX => productX.ScreenSize >= border);
-                                    break;
-                                case Characteristics.Frequency:
-                                    MonitorList = MonitorList.FindAll(productX => productX.Frequency >= border);
-                                    break;
-                            }
-                        }
-                        switch (mainCriterion)
-                        {
-                            case Characteristics.Price:
-                                MonitorList = MonitorList.FindAll(productX => productX.Price == MonitorList.Min(productY => productY.Price));
-                                break;
-                            case Characteristics.ScreenSize:
-                                MonitorList = MonitorList.FindAll(productX => productX.ScreenSize == MonitorList.Max(productY => productY.ScreenSize));
-                                break;
-                            case Characteristics.Frequency:
-                                MonitorList = MonitorList.FindAll(productX => productX.Frequency == MonitorList.Max(productY => productY.Frequency));
-                                break;
-                        }
-                        return MonitorList as List<T>;
-                    #endregion
-
+                    case Characteristics.Price:
+                        productList = productList.FindAll(productX => productX.Price <= border);
+                        break;
+                    case Characteristics.Speed:
+                        if (productList is ISpeed productSpeed)
+                            productList = productList.FindAll(productX => productSpeed.Speed >= border);
+                        break;
+                    case Characteristics.Memory:
+                        if (productList is IMemory productMemory)
+                            productList = productList.FindAll(productX => productMemory.Memory >= border);
+                        break;
+                    case Characteristics.Frequency:
+                        if (productList is IFrequency productFrequency)
+                            productList = productList.FindAll(productX => productFrequency.Frequency >= border);
+                        break;
+                    case Characteristics.Cores:
+                        if (productList is ICores productCores)
+                            productList = productList.FindAll(productX => productCores.Cores >= border);
+                        break;
+                    case Characteristics.ScreenSize:
+                        if (productList is IScreenSize productIScreenSize)
+                            productList = productList.FindAll(productX => productIScreenSize.ScreenSize >= border);
+                        break;
                     default:
-                        return null;
+                        break;
                 }
             }
-            catch (Exception ex)
+            switch (mainCriterion)
             {
-                MessageBox.Show($"{ex}");
-                return null;
+                case Characteristics.Price:
+                    productList = productList.FindAll(productX => productX.Price == productList.Min(productY => productY.Price));
+                    break;
+                case Characteristics.Speed:
+                    if (productList is ISpeed productSpeed)
+                        productList = productList.FindAll(productX => productSpeed.Speed == productList.Max(productY => productSpeed.Speed));
+                    break;
+                case Characteristics.Memory:
+                    if (productList is IMemory productMemory)
+                        productList = productList.FindAll(productX => productMemory.Memory == productList.Max(productY => productMemory.Memory));
+                    break;
+                case Characteristics.Frequency:
+                    if (productList is IFrequency productFrequency)
+                        productList = productList.FindAll(productX => productFrequency.Frequency == productList.Max(productY => productFrequency.Frequency));
+                    break;
+                case Characteristics.Cores:
+                    if (productList is ICores productCores)
+                        productList = productList.FindAll(productX => productCores.Cores == productList.Max(productY => productCores.Cores));
+                    break;
+                case Characteristics.ScreenSize:
+                    if (productList is IScreenSize productIScreenSize)
+                        productList = productList.FindAll(productX => productIScreenSize.ScreenSize == productList.Max(productY => productIScreenSize.ScreenSize));
+                    break;
+                default:
+                    break;
             }
+            return productList;
         }
     }
 }

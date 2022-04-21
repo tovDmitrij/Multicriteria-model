@@ -1,9 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 namespace Multicriteria_model
 {
+    /* Формирование множества Паретто
+
+    По заданному массиву альтернатив находится множество Парето-оптимальных исходов (ParetoArray()),
+    из которого выбор оптимального исхода определяется как максимальная i-я сумма Парето-оптимального исхода
+    текущей альтернативы.
+
+    */
     class ParetoOptimum<T> where T : Product
     {
         private readonly List<T> products;
@@ -11,7 +16,7 @@ namespace Multicriteria_model
         {
             this.products = products;
         }
-        public List<T>? Run()
+        public List<T> Run()
         {
             int[] summ = ParetoArray();
             List<T> newList = products;
@@ -20,87 +25,34 @@ namespace Multicriteria_model
                     newList.Add(products[i]);
             return newList;
         }
-        private int[]? ParetoArray()
+        private int[] ParetoArray()
         {
-            try
+            int[,] paretoArray = new int[products.Count, products.Count];
+            int[] summ = new int[products.Count];
+            List<T> productList = products;
+            for (int i = 0; i < productList.Count; i++)
             {
-                int[,] paretoArray = new int[products.Count, products.Count];
-                int[] summ = new int[products.Count];
-                switch (products)
+                for (int j = 0; j < summ.Length; j++)
                 {
-                    #region Жесткие диски
-                    case List<HDD>:
-                        List<HDD> HDDList = products as List<HDD>;
-                        for (int i = 0; i < products.Count; i++)
-                            for (int j = 0; j < products.Count; j++)
-                                paretoArray[i, j] = HDDList[j].Price < HDDList[i].Price || 
-                                    HDDList[j].Speed > HDDList[i].Speed || 
-                                    HDDList[j].Memory > HDDList[i].Memory ? 1 : 0;
-                        break;
-                    #endregion
-
-                    #region Оперативная память
-                    case List<RAM>:
-                        List<RAM> RAMList = products as List<RAM>;
-                        for (int i = 0; i < products.Count; i++)
-                            for (int j = 0; j < products.Count; j++)
-                                paretoArray[i, j] = RAMList[j].Price < RAMList[i].Price || 
-                                    RAMList[j].Frequency > RAMList[i].Frequency || 
-                                    RAMList[j].Memory > RAMList[i].Memory ? 1 : 0;
-                        break;
-                    #endregion
-
-                    #region Видеокарты
-                    case List<Videocard>:
-                        List<Videocard> VideocardList = products as List<Videocard>;
-                        for (int i = 0; i < products.Count; i++)
-                            for (int j = 0; j < products.Count; j++)
-                                paretoArray[i, j] = VideocardList[j].Price < VideocardList[i].Price || 
-                                    VideocardList[j].Frequency > VideocardList[i].Frequency || 
-                                    VideocardList[j].Memory > VideocardList[i].Memory ? 1 : 0;
-                        break;
-                    #endregion
-
-                    #region Процессоры
-                    case List<Processor>:
-                        List<Processor> ProcessorList = products as List<Processor>;
-                        for (int i = 0; i < products.Count; i++)
-                            for (int j = 0; j < products.Count; j++)
-                                paretoArray[i, j] = ProcessorList[j].Price < ProcessorList[i].Price ||
-                                    ProcessorList[j].Frequency > ProcessorList[i].Frequency ||
-                                    ProcessorList[j].Cores > ProcessorList[i].Cores ? 1 : 0;
-                        break;
-                    #endregion
-
-                    #region Мониторы
-                    case List<Monitor>:
-                        List<Monitor> MonitorList = products as List<Monitor>;
-                        for (int i = 0; i < products.Count; i++)
-                            for (int j = 0; j < products.Count; j++)
-                                paretoArray[i, j] = MonitorList[j].Price < MonitorList[i].Price ||
-                                    MonitorList[j].Frequency > MonitorList[i].Frequency ||
-                                    MonitorList[j].ScreenSize > MonitorList[i].ScreenSize ? 1 : 0;
-                        break;
-                    #endregion
-
-                    default:
-                        return null;
+                    if(productList[i] is ISpeed productFirstSpeed && productList[j] is ISpeed productSecondSpeed)
+                        paretoArray[i, j] += productFirstSpeed.Speed > productSecondSpeed.Speed ? 1 : 0;
+                    if (productList[i] is IMemory productFirstMemory && productList[j] is IMemory productSecondMemory)
+                        paretoArray[i, j] += productFirstMemory.Memory > productSecondMemory.Memory ? 1 : 0;
+                    if (productList[i] is IFrequency productFirstFrequency && productList[j] is IFrequency productSecondFrequency)
+                        paretoArray[i, j] += productFirstFrequency.Frequency > productSecondFrequency.Frequency ? 1 : 0;
+                    if (productList[i] is ICores productFirstCores && productList[j] is ICores productSecondCores)
+                        paretoArray[i, j] += productFirstCores.Cores > productSecondCores.Cores ? 1 : 0;
+                    if (productList[i] is IScreenSize productFirstScreenSize && productList[j] is IScreenSize productSecondScreenSize)
+                        paretoArray[i, j] += productFirstScreenSize.ScreenSize > productSecondScreenSize.ScreenSize ? 1 : 0;
+                    if (productList[i] is Product productFirst && productList[j] is Product productSecond)
+                        paretoArray[i, j] += productFirst.Price < productSecond.Price ? 1 : 0;
+                    paretoArray[i, j] = paretoArray[i, j] > 1 ? 1 : paretoArray[i, j];
                 }
-                for (int i = 0; i < products.Count; i++)
-                {
-                    for(int j = 0; j <= products.Count; j++)
-                    {
-                        summ[i] += paretoArray[i, j];
-                    }
-                }
-                return summ;
-
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex}");
-                return null;
-            }
+            for (int i = 0; i < products.Count; i++)
+                for(int j = 0; j <= products.Count; j++)
+                    summ[i] += paretoArray[i, j];
+            return summ;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Multicriteria_model
                         {
                             for (int j = 0; j < weights.Count; j++)
                             {
-                                tableSumm[i,j] = HDDList[i].Memory
+                                tableSumm[i, j] = HDDList[i].Memory;
                                 //switch (weights.ElementAt(j).Key)
                                 //{
                                 //    case Characteristics.Price:
