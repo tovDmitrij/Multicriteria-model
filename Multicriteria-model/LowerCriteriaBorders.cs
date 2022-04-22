@@ -4,7 +4,6 @@
 Оптимальным при этом считается исход, удовлетворяющий всем нижним границам критериев.
 
 */
-
 using System.Collections.Generic;
 using System.Linq;
 namespace Multicriteria_model
@@ -17,7 +16,7 @@ namespace Multicriteria_model
         private readonly List<T> products;
         private readonly SortedDictionary<double, Characteristics> criteria;
         /// <param name="products">Список <see cref="T"/> товаров</param>
-        /// <param name="criteria">Список <see cref="Characteristics"/> критериев</param>
+        /// <param name="criteria">Список <see cref="Characteristics"/> критериев и их <see cref="double"/> нижние границы</param>
         public LowerCriteriaBorders(List<T> products, SortedDictionary<double, Characteristics> criteria)
         {
             this.products = products;

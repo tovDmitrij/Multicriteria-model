@@ -6,7 +6,6 @@
 Если же таких исходов несколько, то среди них отбирают те, которые имеют максимальную оценку по следующему (за важнейшим критерием) и т.д.
 
 */
-
 using System.Collections.Generic;
 using System.Linq;
 namespace Multicriteria_model
@@ -19,7 +18,7 @@ namespace Multicriteria_model
         private readonly List<T> products;
         private readonly SortedDictionary<byte, Characteristics> criteria;
         /// <param name="products">Список <see cref="T"/> товаров</param>
-        /// <param name="criteria">Список <see cref="Characteristics"/> критериев</param>
+        /// <param name="criteria">Список <see cref="Characteristics"/> критериев и их <see cref="byte"/> порядок</param>
         public Lexicographic(List<T> products, SortedDictionary<byte, Characteristics> criteria)
         {
             this.products = products;

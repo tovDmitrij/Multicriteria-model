@@ -12,6 +12,10 @@ namespace Multicriteria_model
         public uint ScreenSize => screenSize_X * screenSize_Y;
         public double Frequency => frequency;
         public override uint Price => price;
+        /// <param name="name">Имя товара</param>
+        /// <param name="screenSize">Размер экрана</param>
+        /// <param name="frequency">Частота обновления экрана</param>
+        /// <param name="price">Цена</param>
         public Monitor(string name, string screenSize, uint frequency, uint price)
         {
             this.name = name;

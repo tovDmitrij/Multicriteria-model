@@ -5,7 +5,6 @@
 оценки которых по остальным притерием не ниже назначенных.
 
 */
-
 using System.Collections.Generic;
 using System.Linq;
 namespace Multicriteria_model
@@ -19,8 +18,8 @@ namespace Multicriteria_model
         private readonly SortedDictionary<double, Characteristics> criteria;
         private readonly Characteristics mainCriterion;
         /// <param name="products">Список <see cref="T"/> товаров</param>
-        /// <param name="mainCriteria">Главный <see cref="Characteristics"/> критерий</param>
-        /// <param name="criteria">Список <see cref="Characteristics"/> критериев</param>
+        /// <param name="mainCriterion">Главный <see cref="Characteristics"/> критерий</param>
+        /// <param name="criteria">Список <see cref="Characteristics"/> критериев и их <see cref="double"/> нижние границы</param>
         public Suboptimization(List<T> products, Characteristics mainCriterion, SortedDictionary<double, Characteristics> criteria)
         {
             this.products = products;

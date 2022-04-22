@@ -22,9 +22,9 @@ namespace Multicriteria_model
         public MainWindow()
         {
             InitializeComponent();
-            Foo("HDD");
+            Foo(typeof(HDD));
         }
-        void Foo(string productType)
+        void Foo(Type productType)
         {
             string sql = $"select* from {productType}";
             sqlConnection.Open();
@@ -42,7 +42,7 @@ namespace Multicriteria_model
             List<HDD> products;
             switch (productType)
             {
-                case "HDD":
+                case typeof(HDD):
                     products = new List<HDD>();
                     foreach (var k in list)
                     {

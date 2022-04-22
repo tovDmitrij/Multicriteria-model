@@ -10,6 +10,10 @@
         public uint Cores => cores;
         public double Frequency => frequency;
         public override uint Price => price;
+        /// <param name="name">Имя товара</param>
+        /// <param name="cores">Количество ядер</param>
+        /// <param name="frequency">Частота ядра</param>
+        /// <param name="price">Цена</param>
         public Processor(string name, uint cores, double frequency, uint price)
         {
             this.name = name;

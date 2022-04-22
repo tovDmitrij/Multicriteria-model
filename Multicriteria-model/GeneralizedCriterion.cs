@@ -3,11 +3,8 @@
 Процедура, которая "синтезирует" набор оценок по заданным
 
 */
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 namespace Multicriteria_model
 {
     /// <summary>
@@ -41,31 +38,40 @@ namespace Multicriteria_model
         {
             double[,] tableSumm = new double[products.Count, weights.Count];
             double[] summ = new double[products.Count];
-            switch (products)
+            List<T> productList = products;
+            for(int i = 0; i < products.Count; i++)
             {
-                #region Жесткие диски
-                case List<HDD>:
-                    List<HDD> HDDList = products as List<HDD>;
-                    for(int i = 0; i < products.Count; i++)
+                for (int j = 0; j < weights.Count; j++)
+                {
+                    switch (weights.ElementAt(j).Key)
                     {
-                        for (int j = 0; j < weights.Count; j++)
-                        {
-                            tableSumm[i, j] = HDDList[i].Memory;
-                            //switch (weights.ElementAt(j).Key)
-                            //{
-                            //    case Characteristics.Price:
-                            //        tableSumm[i, j] = HDDList[i].Price * weights.ElementAt(j).Value;
-                            //        break;
-                            //    case Characteristics.Memory:
-                            //        tableSumm[i, j] = HDDList[i].Memory * weights.ElementAt(j).Value;
-                            //        break;
-                            //    case Characteristics.Speed:
-                            //        tableSumm[i,j]
-                            //}
-                        }
+                        case Characteristics.Price:
+                            if (productList[i] is Product productPrice)
+                                tableSumm[i, j] = productList.Min(productX => productPrice.Price) / productPrice.Price;
+                            break;
+                        case Characteristics.Memory:
+                            if(productList[i] is IMemory productMemory)
+                                tableSumm[i, j] = productMemory.Memory / productList.Max(productX => productMemory.Memory);
+                            break;
+                        case Characteristics.Speed:
+                            if (productList[i] is ISpeed productSpeed)
+                                tableSumm[i, j] = productSpeed.Speed / productList.Max(productX => productSpeed.Speed);
+                            break;
+                        case Characteristics.Frequency:
+                            if (productList[i] is IFrequency productFrequency)
+                                tableSumm[i, j] = productFrequency.Frequency / productList.Max(productX => productFrequency.Frequency);
+                            break;
+                        case Characteristics.Cores:
+                            if (productList[i] is ICores productCores)
+                                tableSumm[i, j] = productCores.Cores / productList.Max(productX => productCores.Cores);
+                            break;
+                        case Characteristics.ScreenSize:
+                            if (productList[i] is IScreenSize productScreenSize)
+                                tableSumm[i, j] = productScreenSize.ScreenSize / productList.Max(productX => productScreenSize.ScreenSize);
+                            break;
                     }
-                    break;
-                #endregion
+                    summ[i] += tableSumm[i, j] * weights.ElementAt(j).Value;
+                }
             }
             return summ;
         }

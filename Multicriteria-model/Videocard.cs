@@ -10,6 +10,10 @@
         public uint Memory => videoMemory;
         public double Frequency => frequency;
         public override uint Price => price;
+        /// <param name="name">Имя товара</param>
+        /// <param name="videoMemory">Количество видеопамяти</param>
+        /// <param name="frequency">Частота памяти</param>
+        /// <param name="price">Цена</param>
         public Videocard(string name, uint videoMemory, uint frequency, uint price)
         {
             this.name = name;
@@ -19,3 +23,4 @@
         }
     }
 }
+

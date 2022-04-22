@@ -10,6 +10,10 @@
         public uint Memory => memory;
         public uint Speed => speed;
         public override uint Price => price;
+        /// <param name="name">Имя товара</param>
+        /// <param name="memory">Количество памяти</param>
+        /// <param name="speed">Количество оборотов</param>
+        /// <param name="price">Цена</param>
         public HDD(string name, uint memory, uint speed, uint price)
         {
             this.name = name;

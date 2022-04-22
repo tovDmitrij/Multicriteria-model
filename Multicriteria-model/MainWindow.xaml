@@ -7,6 +7,39 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Canvas x:Name="Task" Grid.ColumnSpan="2" Background="AliceBlue">
+            
+        </Canvas>
+        <Canvas x:Name="Criteria" Grid.Column="2" Grid.ColumnSpan="3" Background="Aquamarine">
+            
+        </Canvas>
+        <Canvas x:Name="Result_Lexicographic" Grid.Row="1" Grid.Column="0" Background="Azure">
+            <Frame x:Name="frame" Height="217" Width="160">
+                
+            </Frame>
+        </Canvas>
+        <Canvas x:Name="Result_Suboptimization" Grid.Row="1" Grid.Column="1" Background="LightBlue">
 
+        </Canvas>
+        <Canvas x:Name="Result_LowerCriteriaBorders" Grid.Row="1" Grid.Column="2" Background="LightCoral">
+
+        </Canvas>
+        <Canvas x:Name="Result_ParetoOptimum" Grid.Row="1" Grid.Column="3" Background="LightCyan">
+
+        </Canvas>
+        <Canvas x:Name="Result_GeneralizedCriterion" Grid.Row="1" Grid.Column="4" Background="LightGreen">
+
+        </Canvas>
     </Grid>
 </Window>
