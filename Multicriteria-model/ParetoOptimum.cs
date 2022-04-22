@@ -1,21 +1,30 @@
-﻿using System.Collections.Generic;
+﻿/* Формирование множества Паретто
+
+По заданному массиву альтернатив находится множество Парето-оптимальных исходов (ParetoArray()),
+из которого выбор оптимального исхода определяется как максимальная i-я сумма Парето-оптимального исхода
+текущей альтернативы.
+
+*/
+
+using System.Collections.Generic;
 using System.Linq;
 namespace Multicriteria_model
 {
-    /* Формирование множества Паретто
-
-    По заданному массиву альтернатив находится множество Парето-оптимальных исходов (ParetoArray()),
-    из которого выбор оптимального исхода определяется как максимальная i-я сумма Парето-оптимального исхода
-    текущей альтернативы.
-
-    */
-    class ParetoOptimum<T> where T : Product
+    /// <summary>
+    /// Формирование множества Паретто
+    /// </summary>
+    internal sealed class ParetoOptimum<T> where T : Product
     {
         private readonly List<T> products;
+        /// <param name="products">Список <see cref="T"/> товаров</param>
         public ParetoOptimum(List<T> products)
         {
             this.products = products;
         }
+        /// <summary>
+        /// Формирование множества Паретто
+        /// </summary>
+        /// <returns>Список <see cref="T"/> товаров</returns>
         public List<T> Run()
         {
             int[] summ = ParetoArray();

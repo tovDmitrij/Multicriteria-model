@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Multicriteria_model
+﻿namespace Multicriteria_model
 {
-    class HDD: Product, IMemory, ISpeed
+    internal sealed class HDD : Product, IMemory, ISpeed
     {
         private readonly string name;
         private readonly uint memory;

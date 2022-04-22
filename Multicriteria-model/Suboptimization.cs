@@ -1,25 +1,36 @@
-﻿using System.Collections.Generic;
+﻿/* Субоптимизация
+
+Выделяется один из критериев, а по всем остальным критериям назначаются нижние границы.
+Оптимальным при этом считается исход, максимизирующий выделенный критерий на множестве исходов,
+оценки которых по остальным притерием не ниже назначенных.
+
+*/
+
+using System.Collections.Generic;
 using System.Linq;
 namespace Multicriteria_model
 {
-    /* Субоптимизация
-
-    Выделяется один из критериев, а по всем остальным критериям назначаются нижние границы.
-    Оптимальным при этом считается исход, максимизирующий выделенный критерий на множестве исходов,
-    оценки которых по остальным притерием не ниже назначенных.
-
-    */
-    class Suboptimization<T> where T : Product
+    /// <summary>
+    /// Субоптимизация
+    /// </summary>
+    internal sealed class Suboptimization<T> where T : Product
     {
         private readonly List<T> products;
         private readonly SortedDictionary<double, Characteristics> criteria;
         private readonly Characteristics mainCriterion;
+        /// <param name="products">Список <see cref="T"/> товаров</param>
+        /// <param name="mainCriteria">Главный <see cref="Characteristics"/> критерий</param>
+        /// <param name="criteria">Список <see cref="Characteristics"/> критериев</param>
         public Suboptimization(List<T> products, Characteristics mainCriterion, SortedDictionary<double, Characteristics> criteria)
         {
             this.products = products;
             this.mainCriterion = mainCriterion;
             this.criteria = criteria;
         }
+        /// <summary>
+        /// Субоптимизация
+        /// </summary>
+        /// <returns>Список <see cref="T"/> товаров</returns>
         public List<T> Run()
         {
             List<T> productList = products;

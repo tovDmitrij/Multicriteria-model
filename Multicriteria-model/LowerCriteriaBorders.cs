@@ -1,22 +1,32 @@
-﻿using System.Collections.Generic;
+﻿/* Указание нижних границ критериев
+
+По всем критериям назначаются нижние границы.
+Оптимальным при этом считается исход, удовлетворяющий всем нижним границам критериев.
+
+*/
+
+using System.Collections.Generic;
 using System.Linq;
 namespace Multicriteria_model
 {
-    /* Указание нижних границ критериев
-
-    По всем критериям назначаются нижние границы.
-    Оптимальным при этом считается исход, удовлетворяющий всем нижним границам критериев.
-
-    */
-    class LowerCriteriaBorders<T> where T : Product
+    /// <summary>
+    /// Указание нижних границ критериев
+    /// </summary>
+    internal sealed class LowerCriteriaBorders<T> where T : Product
     {
         private readonly List<T> products;
         private readonly SortedDictionary<double, Characteristics> criteria;
+        /// <param name="products">Список <see cref="T"/> товаров</param>
+        /// <param name="criteria">Список <see cref="Characteristics"/> критериев</param>
         public LowerCriteriaBorders(List<T> products, SortedDictionary<double, Characteristics> criteria)
         {
             this.products = products;
             this.criteria = criteria;
         }
+        /// <summary>
+        /// Указание нижних границ критериев
+        /// </summary>
+        /// <returns>Список <see cref="T"/> товаров</returns>
         public List<T> Run()
         {
             List<T> productList = products;

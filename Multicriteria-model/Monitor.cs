@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Multicriteria_model
 {
-    class Monitor: Product, IComparable<Monitor>, IScreenSize, IFrequency
+    internal sealed class Monitor: Product, IScreenSize, IFrequency
     {
         private readonly string name;
         private readonly uint screenSize_X;
@@ -25,11 +20,6 @@ namespace Multicriteria_model
             screenSize_Y = Convert.ToUInt32(str[1]);
             this.frequency = frequency;
             this.price = price;
-        }
-        public int CompareTo(Monitor other)
-        {
-            return screenSize_X * screenSize_Y < other.screenSize_X * other.screenSize_Y ? -1 :
-                screenSize_X * screenSize_Y > other.screenSize_X * other.screenSize_Y ? 1 : 0;
         }
     }
 }

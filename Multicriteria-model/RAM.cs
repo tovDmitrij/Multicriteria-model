@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Multicriteria_model
+﻿namespace Multicriteria_model
 {
-    class RAM: Product, IMemory, IFrequency
+    internal sealed class RAM : Product, IMemory, IFrequency
     {
         private readonly string name;
         private readonly uint memory;
