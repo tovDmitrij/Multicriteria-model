@@ -27,7 +27,8 @@ MSSQL
 ```
 ### :scroll: Прочее
 ```
-Beautiful Soup
-Selenium
 LINQ
+Selenium
+Beautiful Soup
+Material Design
 ```
