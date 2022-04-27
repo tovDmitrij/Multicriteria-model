@@ -9,34 +9,55 @@
       TextElement.FontWeight="Regular"
       TextElement.FontSize="13"
       TextOptions.TextFormattingMode="Ideal" 
-      TextOptions.TextRenderingMode="Auto"        
-      Background="{DynamicResource MaterialDesignPaper}"
+      TextOptions.TextRenderingMode="Auto"
       FontFamily="{DynamicResource MaterialDesignFont}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Videocard">
-    <Grid>
+    <Grid Background="Transparent">
         <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <Label>Цена товара</Label>
-                <TextBlock></TextBlock>
-                <Label>Приоритет</Label>
-                <TextBlock></TextBlock>
-                <Label>Границы</Label>
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Left">d</TextBlock>
-                    <TextBlock DockPanel.Dock="Right">d</TextBlock>
-                </DockPanel>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <Label>Скорость</Label>
-                <TextBlock></TextBlock>
-                <Label>Приоритет</Label>
-                <TextBlock></TextBlock>
-                <Label>Границы</Label>
-                <TextBlock></TextBlock>
-                <TextBlock></TextBlock>
-            </StackPanel>
+            <Border>
+                <StackPanel Orientation="Vertical" Background="#259ACD32" Margin="10,10,0,0">
+                    <Label Background="#15000000" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">Цена товара</Label>
+                    <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label FontSize="14" Content="Не выше"></Label>
+                        <TextBox FontSize="14" x:Name="priceValue" materialDesign:HintAssist.Hint="Введите цену"></TextBox>
+                    </StackPanel>
+                    <Label Margin="10px" HorizontalAlignment="Center" FontSize="18">Приоритет</Label>
+                    <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label FontSize="14">№</Label>
+                        <TextBox FontSize="14" x:Name="pricePriority" materialDesign:HintAssist.Hint="Введите приоритет"></TextBox>
+                    </StackPanel>
+                    <Label Margin="10px" FontSize="18" HorizontalAlignment="Center">Границы</Label>
+                    <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label FontSize="14">От</Label>
+                        <TextBox FontSize="14" x:Name="priceLeftBorder" materialDesign:HintAssist.Hint="такой-то"></TextBox>
+                        <Label FontSize="14">до</Label>
+                        <TextBox FontSize="14" x:Name="priceRightBorder" materialDesign:HintAssist.Hint="такой-то"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border >
+                <StackPanel Orientation="Vertical" Background="#25ADFF2F" Margin="10,10,0,0">
+                    <Label Background="#15000000" Margin="10px" FontSize="20" HorizontalAlignment="Center">Скорость</Label>
+                    <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label FontSize="14" Content="Не ниже"></Label>
+                        <TextBox FontSize="14" materialDesign:HintAssist.Hint="Введите скорость"></TextBox>
+                    </StackPanel>
+                    <Label Margin="10px" HorizontalAlignment="Center" FontSize="18">Приоритет</Label>
+                    <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label FontSize="14">№</Label>
+                        <TextBox FontSize="14" materialDesign:HintAssist.Hint="Введите приоритет"></TextBox>
+                    </StackPanel>
+                    <Label Margin="10px" FontSize="18" HorizontalAlignment="Center">Границы</Label>
+                    <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label FontSize="14">От</Label>
+                        <TextBox FontSize="14" materialDesign:HintAssist.Hint="такой-то"></TextBox>
+                        <Label FontSize="14">до</Label>
+                        <TextBox FontSize="14" materialDesign:HintAssist.Hint="такой-то"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </Grid>
 </Page>

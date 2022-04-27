@@ -9,12 +9,14 @@
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}"
+        TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Multicriterial model" Height="450" Width="800" Icon="/windows/main/icon.ico">
-    <DockPanel LastChildFill="True" Background="DarkBlue">
+        Title="Multicriterial model" Height="500" Width="800" MinWidth="800" Icon="/windows/main/icon.ico">
+    <Window.Background>
+        <ImageBrush ImageSource="/windows/main/background.png"/>
+    </Window.Background>
+    <DockPanel LastChildFill="True">
         <Label DockPanel.Dock="Bottom" Content="©Кузьмин Дмитрий, 2022г." Background="LightGray" Width="auto" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Normal"/>
         <Frame DockPanel.Dock="Bottom" x:Name="results" Padding="5px"/>
         <Frame DockPanel.Dock="Top" x:Name="task" Padding="5px"/>

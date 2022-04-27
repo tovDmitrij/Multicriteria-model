@@ -39,3 +39,7 @@ C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debu
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\windows\welcome\HelloWorld.g.cs
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\windows\main\Main.baml
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\windows\welcome\HelloWorld.baml
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\net6.0-windows\ControlzEx.dll
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\net6.0-windows\MahApps.Metro.dll
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\net6.0-windows\MaterialDesignThemes.MahApps.dll
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll
