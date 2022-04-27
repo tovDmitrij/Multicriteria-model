@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\App.xaml
-5-1079798786
+6-829756223
 
-201529422937
+211060967789
 1971019563170
-pages\Results.xaml;pages\settings\Criteria.xaml;pages\settings\Task.xaml;windows\HelloWorld.xaml;windows\Main.xaml;
+pages\criteria\Processor.xaml;pages\criteria\Videocard.xaml;pages\Results.xaml;pages\settings\Task.xaml;windows\main\Main.xaml;windows\welcome\HelloWorld.xaml;
 
 False
 

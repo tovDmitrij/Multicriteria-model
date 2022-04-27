@@ -7,30 +7,36 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="pages\Results.xaml.cs">
+    <Compile Update="pages\criteria\Processor.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="pages\settings\Criteria.xaml.cs">
+    <Compile Update="pages\criteria\Videocard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\Results.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="pages\settings\Task.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="windows\HelloWorld.xaml.cs">
+    <Compile Update="windows\welcome\HelloWorld.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="pages\Results.xaml">
+    <Page Update="pages\criteria\Processor.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="pages\settings\Criteria.xaml">
+    <Page Update="pages\criteria\Videocard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\Results.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="pages\settings\Task.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="windows\HelloWorld.xaml">
+    <Page Update="windows\welcome\HelloWorld.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -4,25 +4,37 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Multicriteria_model.pages.settings"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal" 
+      TextOptions.TextRenderingMode="Auto"        
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page_Settings">
-    <DockPanel LastChildFill="True" Background="AliceBlue">
-        <Label DockPanel.Dock="Top" x:Name="label" Content="Выберите задачу" HorizontalAlignment="Center"/>
-        <ComboBox DockPanel.Dock="Top" x:Name="productType" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="productType_SelectionChanged">
-            <ComboBoxItem Content="Покупка видеокарты"/>
-            <ComboBoxItem Content="Покупка процессора"/>
-            <ComboBoxItem Content="Покупка оперативной памяти"/>
-            <ComboBoxItem Content="Покупка жесткого диска"/>
-            <ComboBoxItem Content="Покупка монитора"/>
-        </ComboBox>
-    </DockPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto" MinHeight="50px"/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Label DockPanel.Dock="Top" Margin="10px" Background="red" x:Name="label" Content="Выберите задачу" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center"/>
+            <ComboBox DockPanel.Dock="Top" Background="LightBlue" x:Name="productType" Width="180" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="productType_SelectionChanged" FontSize="14">
+                <ComboBoxItem Content="Покупка видеокарты"/>
+                <ComboBoxItem Content="Покупка процессора"/>
+                <ComboBoxItem Content="Покупка оперативной памяти"/>
+                <ComboBoxItem Content="Покупка жесткого диска"/>
+                <ComboBoxItem Content="Покупка монитора"/>
+            </ComboBox>
+        </DockPanel>
+        <Frame Grid.Column="1" Background="Beige" x:Name="criteria"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10px">Подтвердить</Button>
+    </Grid>
 </Page>

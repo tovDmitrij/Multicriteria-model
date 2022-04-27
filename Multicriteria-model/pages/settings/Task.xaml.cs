@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Multicriteria_model.pages.criteria;
 
 namespace Multicriteria_model.pages.settings
 {
@@ -25,7 +26,17 @@ namespace Multicriteria_model.pages.settings
 
         private void productType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var k = ProductType;
+            switch (ProductType)
+            {
+                case "Покупка видеокарты":
+                    criteria.Navigate(new criteria.Videocard());
+                    break;
+                case "Покупка процессора":
+                    criteria.Navigate(new criteria.Processor());
+                    break;
+                default:
+                    return;
+            }
         }
     }
 }
