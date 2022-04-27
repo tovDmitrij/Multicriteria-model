@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "nKGBAIEPjKakYLbV9eRjTSRYnK0wRcvr3qzzR9Jajj6aeE4H9EhOk1Wg0s7WI0NGri/2O8MzPheQDUH/R+bi+Q==",
+  "dgSpecHash": "qmLDBpmRQUj4LQZiQagXNSHq/4F3ZKOjww53M9QZ8cwOUr+gbYnxH9yeiTXWnGPc1C9kwuN2Ho0eXKKz09NGIA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Дмитрий\\Desktop\\Multicriteria-model\\Multicriteria-model\\Multicriteria-model.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Дмитрий\\.nuget\\packages\\materialdesigncolors\\2.0.5\\materialdesigncolors.2.0.5.nupkg.sha512",
+    "C:\\Users\\Дмитрий\\.nuget\\packages\\materialdesignthemes\\4.4.0\\materialdesignthemes.4.4.0.nupkg.sha512",
     "C:\\Users\\Дмитрий\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Дмитрий\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Дмитрий\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",

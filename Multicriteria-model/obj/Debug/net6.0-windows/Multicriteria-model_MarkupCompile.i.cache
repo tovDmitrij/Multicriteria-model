@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\App.xaml
-2-1846649346
+5-1079798786
 
-19-1509040364
-1951745643267
-pages\Lexicographic.xaml;pages\MainWindow.xaml;
+22-1235163267
+1971019563170
+pages\Results.xaml;pages\settings\Criteria.xaml;pages\settings\Task.xaml;windows\HelloWorld.xaml;windows\Main.xaml;
 
 True
 

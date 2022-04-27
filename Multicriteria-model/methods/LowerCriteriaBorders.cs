@@ -58,8 +58,6 @@ namespace Multicriteria_model
                         if (productList is IScreenSize productIScreenSize)
                             productList = productList.FindAll(productX => productIScreenSize.ScreenSize >= border);
                         break;
-                    default:
-                        break;
                 }
             }
             return productList;

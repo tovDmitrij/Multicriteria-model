@@ -7,15 +7,30 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Lexicographic.xaml.cs">
+    <Compile Update="pages\Results.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\settings\Criteria.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\settings\Task.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="windows\HelloWorld.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Lexicographic.xaml">
+    <Page Update="pages\Results.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="pages\settings\Criteria.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\settings\Task.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="windows\HelloWorld.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

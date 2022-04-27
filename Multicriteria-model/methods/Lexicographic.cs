@@ -59,8 +59,6 @@ namespace Multicriteria_model
                         if (productList is IScreenSize productIScreenSize)
                             productList = productList.FindAll(productX => productIScreenSize.ScreenSize == productList.Max(productY => productIScreenSize.ScreenSize));
                         break;
-                    default:
-                        break;
                 }
             }
             return productList;

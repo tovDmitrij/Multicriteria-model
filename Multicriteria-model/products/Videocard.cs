@@ -21,6 +21,10 @@
             this.frequency = frequency;
             this.price = price;
         }
+        /// <summary>
+        /// Вывод характеристик видеокарты
+        /// </summary>
+        public override string Print => $"Видеокарта {name} {videoMemory} ГБ {frequency} МГц {price} ₽";
     }
 }
 

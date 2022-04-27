@@ -21,5 +21,10 @@
             this.frequency = frequency;
             this.price = price;
         }
+        /// <summary>
+        /// Вывод характеристик процессора
+        /// </summary>
+        public override string Print => $"Процессор {name} {cores} х {frequency} ГГц {price} ₽";
+
     }
 }

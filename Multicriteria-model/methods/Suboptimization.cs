@@ -62,8 +62,6 @@ namespace Multicriteria_model
                         if (productList is IScreenSize productIScreenSize)
                             productList = productList.FindAll(productX => productIScreenSize.ScreenSize >= border);
                         break;
-                    default:
-                        break;
                 }
             }
             switch (mainCriterion)
@@ -90,8 +88,6 @@ namespace Multicriteria_model
                 case Characteristics.ScreenSize:
                     if (productList is IScreenSize productIScreenSize)
                         productList = productList.FindAll(productX => productIScreenSize.ScreenSize == productList.Max(productY => productIScreenSize.ScreenSize));
-                    break;
-                default:
                     break;
             }
             return productList;

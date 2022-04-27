@@ -25,5 +25,10 @@ namespace Multicriteria_model
             this.frequency = frequency;
             this.price = price;
         }
+        /// <summary>
+        /// Вывод характеристик монитора
+        /// </summary>
+        public override string Print => $"Монитор {name} {screenSize_X}x{screenSize_Y}@{frequency} Гц {price} ₽";
+
     }
 }

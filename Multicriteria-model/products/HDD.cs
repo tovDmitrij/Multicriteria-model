@@ -21,5 +21,10 @@
             this.speed = speed;
             this.price = price;
         }
+        /// <summary>
+        /// Вывод характеристик жёсткого диска
+        /// </summary>
+        public override string Print => $"Жёсткий диск {name} {memory} Гб {speed} rpm {price} ₽";
+
     }
 }

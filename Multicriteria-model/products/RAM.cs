@@ -21,5 +21,10 @@
             this.frequency = frequency;
             this.price = price;
         }
+        /// <summary>
+        /// Вывод характеристик оперативной памяти
+        /// </summary>
+        public override string Print => $"Оперативная память {name} {memory} ГБ {frequency} МГц {price} ₽";
+
     }
 }
