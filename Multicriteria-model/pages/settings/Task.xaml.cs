@@ -19,9 +19,18 @@ namespace Multicriteria_model.pages.settings
     public partial class Task : Page
     {
         public string ProductType => (productType.SelectedItem as ComboBoxItem).Content.ToString();
+        public object Results
+        {
+            set
+            {
+                results.Navigate(value);
+            }
+        }
         public Task()
         {
             InitializeComponent();
+            results.Navigate(new pages.Results());
+
         }
 
         private void productType_SelectionChanged(object sender, SelectionChangedEventArgs e)

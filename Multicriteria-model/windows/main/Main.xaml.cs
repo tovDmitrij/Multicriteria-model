@@ -25,7 +25,6 @@ namespace Multicriteria_model
             InitializeComponent();
             task.Navigate(new pages.settings.Task());
             //criteria.Navigate(new pages.settings.Criteria());
-            results.Navigate(new pages.Results());
             //Foo(typeof(HDD));
         }
         void Foo(Type productType)

@@ -17,26 +17,69 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition MaxWidth="200px"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition MaxHeight="50px" MinHeight="50px"/>
         </Grid.RowDefinitions>
-        <Border Padding="0, 10, 0, 0">
-            <DockPanel Background="#5000FF7F">
-                <Label DockPanel.Dock="Top" Margin="10px" x:Name="label" Background="#15000000" Content="Выберите задачу" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
-                <ComboBox DockPanel.Dock="Top" x:Name="productType" Width="180" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionChanged="productType_SelectionChanged" FontSize="16">
-                    <ComboBoxItem Content="Покупка видеокарты"/>
-                    <ComboBoxItem Content="Покупка процессора"/>
-                    <ComboBoxItem Content="Покупка оперативной памяти"/>
-                    <ComboBoxItem Content="Покупка жесткого диска"/>
-                    <ComboBoxItem Content="Покупка монитора"/>
-                </ComboBox>
+        <ScrollViewer Background="#FF003238" Foreground="#FF004048">
+            <Grid>
+                <Border>
+                    <DockPanel Background="#FF003238">
+                        <Label DockPanel.Dock="Top" Margin="5,5,5,0" Background="#FF00262B" Content="НАСТРОЙКИ" HorizontalContentAlignment="Center" Width="auto" FontSize="20" VerticalAlignment="Center" Foreground="#DDD2D2D2"/>
+                        <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="ЗАДАЧА" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
+                            <Label.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                            <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF004546"/>
+                                    <GradientStop Color="#FF003238" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Label.Background>
+                        </Label>
+                        <ComboBox  DockPanel.Dock="Top" x:Name="productType" Margin="5,0,5,0" VerticalAlignment="Top" SelectionChanged="productType_SelectionChanged" FontSize="16" Foreground="#DDD2D2D2" Background="#FF00282D">
+                            <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка видеокарты"/>
+                            <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка процессора"/>
+                            <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка оперативной памяти"/>
+                            <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка жесткого диска"/>
+                            <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка монитора"/>
+                        </ComboBox>
+                        <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="РЕЗУЛЬТАТ" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
+                            <Label.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <LinearGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                            <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </LinearGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#FF004546"/>
+                                    <GradientStop Color="#FF003238" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Label.Background>
+                        </Label>
+                        <ComboBox  DockPanel.Dock="Top" Margin="5,0,5,0" VerticalAlignment="Top" SelectionChanged="productType_SelectionChanged" FontSize="16" Foreground="#DDD2D2D2" Background="#FF00282D">
+                            <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Краткий"/>
+                            <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Подробный"/>
+                        </ComboBox>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="1" Foreground="#FF004048">
+            <DockPanel Grid.Column="1">
+                <Frame DockPanel.Dock="Top" x:Name="criteria"/>
+                <Frame DockPanel.Dock="Top" x:Name="results"/>
             </DockPanel>
-        </Border>
-        <Frame Grid.Column="1" x:Name="criteria"/>
-        <Button Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10px">Подтвердить</Button>
+        </ScrollViewer>
     </Grid>
 </Page>

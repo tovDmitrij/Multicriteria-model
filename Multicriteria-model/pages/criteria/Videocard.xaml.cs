@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Multicriteria_model.pages.settings;
 
 namespace Multicriteria_model.pages.criteria
 {
@@ -23,6 +24,12 @@ namespace Multicriteria_model.pages.criteria
         public Videocard()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //settings.Results = new pages.Results();
+            //results.Navigate(new pages.Results());
         }
     }
 }

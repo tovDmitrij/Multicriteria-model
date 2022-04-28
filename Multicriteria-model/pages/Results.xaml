@@ -16,6 +16,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page_Results">
     <DockPanel LastChildFill="True" Background="LightCoral">
-        <Label>dwadwa</Label>
+        <Label Background="#FF37003A">dwadwa</Label>
     </DockPanel>
 </Page>
