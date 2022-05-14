@@ -1,38 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Multicriteria_model.pages.criteria;
-
 namespace Multicriteria_model.pages.settings
 {
-    public partial class Task : Page
+    /// <summary>
+    /// Задача выбора
+    /// </summary>
+    public sealed partial class Task : Page
     {
+        /// <summary>
+        /// Получить выбранный тип товара
+        /// </summary>
         public string ProductType => (productType.SelectedItem as ComboBoxItem).Content.ToString();
-        public object Results
+        /// <summary>
+        /// Страница для вывода результата
+        /// </summary>
+        public object ResultFrame
         {
             set
             {
-                results.Navigate(value);
+                //results.Navigate(new Results());
             }
         }
+        /// <summary>
+        /// Задача выбора
+        /// </summary>
         public Task()
         {
             InitializeComponent();
-            results.Navigate(new pages.Results());
-
         }
-
         private void productType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (ProductType)
@@ -42,6 +37,15 @@ namespace Multicriteria_model.pages.settings
                     break;
                 case "Покупка процессора":
                     criteria.Navigate(new criteria.Processor());
+                    break;
+                case "Покупка оперативной памяти":
+                    criteria.Navigate(new criteria.RAM());
+                    break;
+                case "Покупка жесткого диска":
+                    criteria.Navigate(new criteria.pageHDD(this));
+                    break;
+                case "Покупка монитора":
+                    criteria.Navigate(new criteria.Monitor());
                     break;
                 default:
                     return;

@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
+﻿using System.Windows.Controls;
 namespace Multicriteria_model.pages
 {
     /// <summary>
-    /// Логика взаимодействия для Page_Results.xaml
+    /// Вывод результата
     /// </summary>
     public partial class Results : Page
     {
-        public Results()
+        /// <summary>
+        /// Вывод результата
+        /// </summary>
+        /// <param name="shortResult">Краткий результат</param>
+        /// <param name="detailedResult">Подробный результат</param>
+        public Results(string shortResult, string detailedResult)
         {
             InitializeComponent();
+            shortResultText.Text = shortResult;
+            detailedResultText.Text = detailedResult;
         }
     }
 }

@@ -15,7 +15,7 @@
       Title="Videocard" Height="245">
     <Grid Background="Transparent">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer Background="#FF003238" Foreground="#FF004048" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
                 <StackPanel Orientation="Horizontal">
                     <!--Цена-->
                     <Border Padding="0,0,0,10">
@@ -33,26 +33,10 @@
                             </StackPanel>
                         </StackPanel>
                     </Border>
-                    <!--Скорость-->
-                    <Border Padding="0,0,0,10">
-                        <StackPanel Orientation="Vertical" Background="#FF003238" Margin="10,10,0,0">
-                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">СКОРОСТЬ</Label>
-                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label Foreground="#DDD2D2D2" FontSize="14" Content="Не ниже"></Label>
-                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите скорость"></TextBox>
-                            </StackPanel>
-
-                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalAlignment="Center" FontSize="18">ПРИОРИТЕТ</Label>
-                            <StackPanel Margin="5,0,5,5" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label Foreground="#DDD2D2D2" FontSize="14">№</Label>
-                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите приоритет"></TextBox>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
                     <!--Память-->
                     <Border Padding="0,0,0,10">
                         <StackPanel Orientation="Vertical" Background="#FF003238" Margin="10,10,0,0">
-                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">Память</Label>
+                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">ПАМЯТЬ</Label>
                             <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Label Foreground="#DDD2D2D2" FontSize="14" Content="Не ниже"></Label>
                                 <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите кол-во"></TextBox>
@@ -71,36 +55,6 @@
                             <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Label Foreground="#DDD2D2D2" FontSize="14" Content="Не ниже"></Label>
                                 <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите частоту"></TextBox>
-                            </StackPanel>
-                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalAlignment="Center" FontSize="18">ПРИОРИТЕТ</Label>
-                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label Foreground="#DDD2D2D2" FontSize="14">№</Label>
-                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите приоритет"></TextBox>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                    <!--Ядра-->
-                    <Border Padding="0,0,0,10">
-                        <StackPanel Orientation="Vertical" Background="#FF003238" Margin="10,10,0,0">
-                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">ЯДРА</Label>
-                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label Foreground="#DDD2D2D2" FontSize="14" Content="Не ниже"></Label>
-                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите кол-во"></TextBox>
-                            </StackPanel>
-                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalAlignment="Center" FontSize="18">ПРИОРИТЕТ</Label>
-                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label Foreground="#DDD2D2D2" FontSize="14">№</Label>
-                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите приоритет"></TextBox>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                    <!--Размер экрана-->
-                    <Border Padding="0,0,10,10">
-                        <StackPanel Orientation="Vertical" Background="#FF003238" Margin="10,10,0,0">
-                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">РАЗМЕР</Label>
-                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Label Foreground="#DDD2D2D2" FontSize="14" Content="Не ниже"></Label>
-                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите размер"></TextBox>
                             </StackPanel>
                             <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalAlignment="Center" FontSize="18">ПРИОРИТЕТ</Label>
                             <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">

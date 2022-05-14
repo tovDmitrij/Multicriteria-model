@@ -24,5 +24,10 @@ namespace Multicriteria_model.pages.criteria
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

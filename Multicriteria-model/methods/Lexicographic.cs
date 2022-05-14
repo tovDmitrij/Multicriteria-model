@@ -6,13 +6,16 @@
 Если же таких исходов несколько, то среди них отбирают те, которые имеют максимальную оценку по следующему (за важнейшим критерием) и т.д.
 
 */
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Windows;
+
 namespace Multicriteria_model
 {
     /// <summary>
     /// Лексикографическая оптимизация
     /// </summary>
+    /// 
     internal sealed class Lexicographic<T> where T : Product
     {
         private readonly List<T> products;
@@ -33,32 +36,16 @@ namespace Multicriteria_model
             List<T> productList = products;
             for (byte i = 1; i <= criteria.Count; i++)
             {
-                Characteristics currentCriteria = criteria[i];
-                switch (currentCriteria)
+                try
                 {
-                    case Characteristics.Price:
-                        productList = productList.FindAll(productX => productX.Price == productList.Min(productY => productY.Price));
-                        break;
-                    case Characteristics.Speed:
-                        if (productList is ISpeed productSpeed)
-                            productList = productList.FindAll(productX => productSpeed.Speed == productList.Max(productY => productSpeed.Speed));
-                        break;
-                    case Characteristics.Memory:
-                        if (productList is IMemory productMemory)
-                            productList = productList.FindAll(productX => productMemory.Memory == productList.Max(productY => productMemory.Memory));
-                        break;
-                    case Characteristics.Frequency:
-                        if (productList is IFrequency productFrequency)
-                            productList = productList.FindAll(productX => productFrequency.Frequency == productList.Max(productY => productFrequency.Frequency));
-                        break;
-                    case Characteristics.Cores:
-                        if (productList is ICores productCores)
-                            productList = productList.FindAll(productX => productCores.Cores == productList.Max(productY => productCores.Cores));
-                        break;
-                    case Characteristics.ScreenSize:
-                        if (productList is IScreenSize productIScreenSize)
-                            productList = productList.FindAll(productX => productIScreenSize.ScreenSize == productList.Max(productY => productIScreenSize.ScreenSize));
-                        break;
+                    productList = productList.FindAll(criteria[i]);
+                }
+                catch(Exception ex)
+                {
+                    string exception = "Ошибка в лексикографической оптимизации:\n";
+                    exception += productList is null ? "Список товаров пустой!" : $"{ex}";
+                    MessageBox.Show($"{exception}");
+                    return productList;
                 }
             }
             return productList;

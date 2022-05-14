@@ -12,7 +12,7 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Multicriterial model" Height="500" Width="800" MinWidth="800" Icon="/windows/main/icon.ico" WindowStyle="SingleBorderWindow">
+        Title="Multicriterial model" Height="500" Width="800" Icon="/windows/main/icon.ico" WindowStyle="SingleBorderWindow">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" SpreadMethod="Pad">
             <LinearGradientBrush.RelativeTransform>
@@ -30,7 +30,9 @@
     <Grid>
         <DockPanel LastChildFill="True">
             <Label DockPanel.Dock="Bottom" Content="©Кузьмин Дмитрий, 2022г." Background="#FF002D31" Width="auto" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Normal" Foreground="#DD9A9A9A"/>
-            <Frame DockPanel.Dock="Top" x:Name="task"/>
+            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="auto">
+                <Frame NavigationUIVisibility="Hidden" x:Name="task"/>
+            </ScrollViewer>
         </DockPanel>
     </Grid>
 </Window>

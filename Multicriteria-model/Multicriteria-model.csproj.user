@@ -7,7 +7,16 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="pages\criteria\HDD.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\criteria\Monitor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="pages\criteria\Processor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="pages\criteria\RAM.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="pages\criteria\Videocard.xaml.cs">
@@ -24,7 +33,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="pages\criteria\HDD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\criteria\Monitor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="pages\criteria\Processor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="pages\criteria\RAM.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="pages\criteria\Videocard.xaml">

@@ -9,13 +9,65 @@
       TextElement.FontWeight="Regular"
       TextElement.FontSize="13"
       TextOptions.TextFormattingMode="Ideal" 
-      TextOptions.TextRenderingMode="Auto"        
-      Background="{DynamicResource MaterialDesignPaper}"
+      TextOptions.TextRenderingMode="Auto"
       FontFamily="{DynamicResource MaterialDesignFont}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Processor">
-    <DockPanel>
-        <Label>dwihadwadwa</Label>
-    </DockPanel>
+    <Grid Background="Transparent">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <ScrollViewer Background="#FF003238" Foreground="#FF004048" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+                <StackPanel Orientation="Horizontal">
+                    <!--Цена-->
+                    <Border Padding="0,0,0,10">
+                        <StackPanel Orientation="Vertical" Background="#FF003238" Margin="10,10,0,0">
+                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">ЦЕНА</Label>
+                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label Foreground="#DDD2D2D2" FontSize="14" Content="Не выше"></Label>
+                                <TextBox Foreground="#DDD2D2D2" FontSize="14" x:Name="priceValue" materialDesign:HintAssist.Hint="Введите цену"></TextBox>
+                            </StackPanel>
+
+                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalAlignment="Center" FontSize="18">ПРИОРИТЕТ</Label>
+                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label Foreground="#DDD2D2D2" FontSize="14">№</Label>
+                                <TextBox Foreground="#DDD2D2D2" FontSize="14" x:Name="pricePriority" materialDesign:HintAssist.Hint="Введите приоритет"></TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <!--Частота-->
+                    <Border Padding="0,0,0,10">
+                        <StackPanel Orientation="Vertical" Background="#FF003238" Margin="10,10,0,0">
+                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">ЧАСТОТА</Label>
+                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label Foreground="#DDD2D2D2" FontSize="14" Content="Не ниже"></Label>
+                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите частоту"></TextBox>
+                            </StackPanel>
+                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalAlignment="Center" FontSize="18">ПРИОРИТЕТ</Label>
+                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label Foreground="#DDD2D2D2" FontSize="14">№</Label>
+                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите приоритет"></TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <!--Ядра-->
+                    <Border Padding="0,0,0,10">
+                        <StackPanel Orientation="Vertical" Background="#FF003238" Margin="10,10,0,0">
+                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">ЯДРА</Label>
+                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label Foreground="#DDD2D2D2" FontSize="14" Content="Не ниже"></Label>
+                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите кол-во"></TextBox>
+                            </StackPanel>
+                            <Label Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalAlignment="Center" FontSize="18">ПРИОРИТЕТ</Label>
+                            <StackPanel Margin="5,0,5,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Label Foreground="#DDD2D2D2" FontSize="14">№</Label>
+                                <TextBox Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите приоритет"></TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+            <Button DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10px" Background="#FF00262B" FontWeight="Normal" BorderThickness="0,0,0,0" Click="Button_Click">Подтвердить</Button>
+        </StackPanel>
+    </Grid>
+
 </Page>

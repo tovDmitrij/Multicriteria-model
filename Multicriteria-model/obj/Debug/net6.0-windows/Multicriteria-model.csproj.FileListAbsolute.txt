@@ -43,3 +43,9 @@ C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debu
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\net6.0-windows\MahApps.Metro.dll
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\net6.0-windows\MaterialDesignThemes.MahApps.dll
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\pages\criteria\HDD.g.cs
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\pages\criteria\Monitor.g.cs
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\pages\criteria\RAM.g.cs
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\pages\criteria\HDD.baml
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\pages\criteria\Monitor.baml
+C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\obj\Debug\net6.0-windows\pages\criteria\RAM.baml

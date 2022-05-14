@@ -1,4 +1,4 @@
 ﻿namespace Multicriteria_model
 {
-    enum Characteristics { Price, Speed, Memory, Frequency, Cores, ScreenSize }
+    public enum Characteristics { Price, Speed, Memory, Frequency, Cores, ScreenSize }
 }

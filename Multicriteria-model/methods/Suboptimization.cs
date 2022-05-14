@@ -5,8 +5,10 @@
 оценки которых по остальным притерием не ниже назначенных.
 
 */
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 namespace Multicriteria_model
 {
     /// <summary>
@@ -15,12 +17,12 @@ namespace Multicriteria_model
     internal sealed class Suboptimization<T> where T : Product
     {
         private readonly List<T> products;
-        private readonly SortedDictionary<double, Characteristics> criteria;
+        private readonly SortedDictionary<Characteristics, double> criteria;
         private readonly Characteristics mainCriterion;
         /// <param name="products">Список <see cref="T"/> товаров</param>
         /// <param name="mainCriterion">Главный <see cref="Characteristics"/> критерий</param>
         /// <param name="criteria">Список <see cref="Characteristics"/> критериев и их <see cref="double"/> нижние границы</param>
-        public Suboptimization(List<T> products, Characteristics mainCriterion, SortedDictionary<double, Characteristics> criteria)
+        public Suboptimization(List<T> products, Characteristics mainCriterion, SortedDictionary<Characteristics, double> criteria)
         {
             this.products = products;
             this.mainCriterion = mainCriterion;
@@ -35,62 +37,19 @@ namespace Multicriteria_model
             List<T> productList = products;
             for (byte i = 0; i < criteria.Count; i++)
             {
-                Characteristics currentCriteria = criteria.ElementAt(i).Value;
-                double border = criteria.ElementAt(i).Key;
-                switch (currentCriteria)
+                try
                 {
-                    case Characteristics.Price:
-                        productList = productList.FindAll(productX => productX.Price <= border);
-                        break;
-                    case Characteristics.Speed:
-                        if (productList is ISpeed productSpeed)
-                            productList = productList.FindAll(productX => productSpeed.Speed >= border);
-                        break;
-                    case Characteristics.Memory:
-                        if (productList is IMemory productMemory)
-                            productList = productList.FindAll(productX => productMemory.Memory >= border);
-                        break;
-                    case Characteristics.Frequency:
-                        if (productList is IFrequency productFrequency)
-                            productList = productList.FindAll(productX => productFrequency.Frequency >= border);
-                        break;
-                    case Characteristics.Cores:
-                        if (productList is ICores productCores)
-                            productList = productList.FindAll(productX => productCores.Cores >= border);
-                        break;
-                    case Characteristics.ScreenSize:
-                        if (productList is IScreenSize productIScreenSize)
-                            productList = productList.FindAll(productX => productIScreenSize.ScreenSize >= border);
-                        break;
+                    productList = productList.FindAll(criteria.ElementAt(i).Key, criteria.ElementAt(i).Value);
+                }
+                catch(Exception ex)
+                {
+                    string exception = "Ошибка в субоптимизации:\n";
+                    exception += productList is null ? "Список товаров пустой!" : $"{ex}";
+                    MessageBox.Show($"{exception}");
+                    return productList;
                 }
             }
-            switch (mainCriterion)
-            {
-                case Characteristics.Price:
-                    productList = productList.FindAll(productX => productX.Price == productList.Min(productY => productY.Price));
-                    break;
-                case Characteristics.Speed:
-                    if (productList is ISpeed productSpeed)
-                        productList = productList.FindAll(productX => productSpeed.Speed == productList.Max(productY => productSpeed.Speed));
-                    break;
-                case Characteristics.Memory:
-                    if (productList is IMemory productMemory)
-                        productList = productList.FindAll(productX => productMemory.Memory == productList.Max(productY => productMemory.Memory));
-                    break;
-                case Characteristics.Frequency:
-                    if (productList is IFrequency productFrequency)
-                        productList = productList.FindAll(productX => productFrequency.Frequency == productList.Max(productY => productFrequency.Frequency));
-                    break;
-                case Characteristics.Cores:
-                    if (productList is ICores productCores)
-                        productList = productList.FindAll(productX => productCores.Cores == productList.Max(productY => productCores.Cores));
-                    break;
-                case Characteristics.ScreenSize:
-                    if (productList is IScreenSize productIScreenSize)
-                        productList = productList.FindAll(productX => productIScreenSize.ScreenSize == productList.Max(productY => productIScreenSize.ScreenSize));
-                    break;
-            }
-            return productList;
+            return productList.FindAll(mainCriterion);
         }
     }
 }

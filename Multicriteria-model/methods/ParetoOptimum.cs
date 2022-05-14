@@ -29,8 +29,12 @@ namespace Multicriteria_model
             int[] summ = ParetoArray();
             List<T> newList = products;
             for(int i = 0; i < summ.Length; i++)
+            {
                 if (summ[i] == summ.Max())
-                    newList.Add(products[i]);
+                {
+                        newList.Add(products[i]);
+                }
+            }
             return newList;
         }
         private int[] ParetoArray()
@@ -42,24 +46,33 @@ namespace Multicriteria_model
             {
                 for (int j = 0; j < summ.Length; j++)
                 {
-                    if(productList[i] is ISpeed productFirstSpeed && productList[j] is ISpeed productSecondSpeed)
+                    if (productList[i] is ISpeed productFirstSpeed && productList[j] is ISpeed productSecondSpeed)
+                    {
                         paretoArray[i, j] += productFirstSpeed.Speed > productSecondSpeed.Speed ? 1 : 0;
+                    }
                     if (productList[i] is IMemory productFirstMemory && productList[j] is IMemory productSecondMemory)
+                    {
                         paretoArray[i, j] += productFirstMemory.Memory > productSecondMemory.Memory ? 1 : 0;
+                    }
                     if (productList[i] is IFrequency productFirstFrequency && productList[j] is IFrequency productSecondFrequency)
+                    { 
                         paretoArray[i, j] += productFirstFrequency.Frequency > productSecondFrequency.Frequency ? 1 : 0;
+                    }
                     if (productList[i] is ICores productFirstCores && productList[j] is ICores productSecondCores)
+                    {
                         paretoArray[i, j] += productFirstCores.Cores > productSecondCores.Cores ? 1 : 0;
+                    }
                     if (productList[i] is IScreenSize productFirstScreenSize && productList[j] is IScreenSize productSecondScreenSize)
+                    { 
                         paretoArray[i, j] += productFirstScreenSize.ScreenSize > productSecondScreenSize.ScreenSize ? 1 : 0;
+                    }
                     if (productList[i] is Product productFirst && productList[j] is Product productSecond)
+                    {
                         paretoArray[i, j] += productFirst.Price < productSecond.Price ? 1 : 0;
-                    paretoArray[i, j] = paretoArray[i, j] > 1 ? 1 : paretoArray[i, j];
+                    }
+                    summ[i] += paretoArray[i, j] > 1 ? 1 : paretoArray[i, j];
                 }
             }
-            for (int i = 0; i < products.Count; i++)
-                for(int j = 0; j <= products.Count; j++)
-                    summ[i] += paretoArray[i, j];
             return summ;
         }
     }

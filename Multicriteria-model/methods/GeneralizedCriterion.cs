@@ -1,6 +1,6 @@
 ﻿/* Обобщенный критерий
 
-Процедура, которая "синтезирует" набор оценок по заданным
+Процедура, которая "синтезирует" набор оценок по заданным критериям
 
 */
 using System.Collections.Generic;
@@ -27,53 +27,41 @@ namespace Multicriteria_model
         /// <returns>Список <see cref="T"/> товаров</returns>
         public List<T> Run()
         {
-            double[] summ = genCriterion();
-            List<T> newList = products;
+            double[] summ = GenCriterion();
+            List<T> newProductList = products;
             for (int i = 0; i < summ.Length; i++)
+            {
                 if (summ[i] == summ.Max())
-                    newList.Add(products[i]);
-            return newList;
+                {
+                    newProductList.Add(products[i]);
+                }
+            }
+            return newProductList;
         }
-        private double[] genCriterion()
+        private double[] GenCriterion()
         {
-            double[,] tableSumm = new double[products.Count, weights.Count];
             double[] summ = new double[products.Count];
-            List<T> productList = products;
             for(int i = 0; i < products.Count; i++)
             {
                 for (int j = 0; j < weights.Count; j++)
                 {
-                    switch (weights.ElementAt(j).Key)
-                    {
-                        case Characteristics.Price:
-                            if (productList[i] is Product productPrice)
-                                tableSumm[i, j] = productList.Min(productX => productPrice.Price) / productPrice.Price;
-                            break;
-                        case Characteristics.Memory:
-                            if(productList[i] is IMemory productMemory)
-                                tableSumm[i, j] = productMemory.Memory / productList.Max(productX => productMemory.Memory);
-                            break;
-                        case Characteristics.Speed:
-                            if (productList[i] is ISpeed productSpeed)
-                                tableSumm[i, j] = productSpeed.Speed / productList.Max(productX => productSpeed.Speed);
-                            break;
-                        case Characteristics.Frequency:
-                            if (productList[i] is IFrequency productFrequency)
-                                tableSumm[i, j] = productFrequency.Frequency / productList.Max(productX => productFrequency.Frequency);
-                            break;
-                        case Characteristics.Cores:
-                            if (productList[i] is ICores productCores)
-                                tableSumm[i, j] = productCores.Cores / productList.Max(productX => productCores.Cores);
-                            break;
-                        case Characteristics.ScreenSize:
-                            if (productList[i] is IScreenSize productScreenSize)
-                                tableSumm[i, j] = productScreenSize.ScreenSize / productList.Max(productX => productScreenSize.ScreenSize);
-                            break;
-                    }
-                    summ[i] += tableSumm[i, j] * weights.ElementAt(j).Value;
+                    summ[i] += Calculate(weights.ElementAt(j).Key, weights.ElementAt(j).Value, products, products[i]);
                 }
             }
             return summ;
+        }
+        private double Calculate(Characteristics currentCriteria, double currentWeight , List<T> productList, T currentProduct)
+        {
+            return currentCriteria switch
+            {
+                Characteristics.Price => currentProduct.Price / productList.Max(productX => (currentProduct.Price)) * currentWeight,
+                Characteristics.Memory => ((IMemory)currentProduct).Memory / productList.Max(productX => ((IMemory)currentProduct).Memory),
+                Characteristics.Speed => ((ISpeed)currentProduct).Speed / productList.Max(productX => ((ISpeed)currentProduct).Speed),
+                Characteristics.Frequency => ((IFrequency)currentProduct).Frequency / productList.Max(productX => ((IFrequency)currentProduct).Frequency),
+                Characteristics.Cores => ((ICores)currentProduct).Cores / productList.Max(productX => ((ICores)currentProduct).Cores),
+                Characteristics.ScreenSize => ((IScreenSize)currentProduct).ScreenSize / productList.Max(productX => ((IScreenSize)currentProduct).ScreenSize),
+                _ => 0.0,
+            };
         }
     }
 }

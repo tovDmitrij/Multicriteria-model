@@ -1,20 +1,21 @@
-﻿namespace Multicriteria_model
+﻿using System;
+namespace Multicriteria_model
 {
     internal sealed class HDD : Product, IMemory, ISpeed
     {
         private readonly string name;
         private readonly uint memory;
         private readonly uint speed;
-        private readonly uint price;
+        private readonly int price;
         public override string Name => name;
         public uint Memory => memory;
         public uint Speed => speed;
-        public override uint Price => price;
+        public override int Price => price;
         /// <param name="name">Имя товара</param>
         /// <param name="memory">Количество памяти</param>
         /// <param name="speed">Количество оборотов</param>
         /// <param name="price">Цена</param>
-        public HDD(string name, uint memory, uint speed, uint price)
+        public HDD(string name, uint memory, uint speed, int price)
         {
             this.name = name;
             this.memory = memory;
@@ -24,7 +25,7 @@
         /// <summary>
         /// Вывод характеристик жёсткого диска
         /// </summary>
-        public override string Print => $"Жёсткий диск {name} {memory} Гб {speed} rpm {price} ₽";
+        public override string Print => $"Жёсткий диск {name} {memory} Гб {speed} rpm {Math.Abs(price)} ₽";
 
     }
 }
