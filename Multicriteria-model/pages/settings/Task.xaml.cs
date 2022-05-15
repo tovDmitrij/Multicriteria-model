@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Windows;
 using System.Windows.Controls;
 namespace Multicriteria_model.pages.settings
 {
@@ -11,41 +11,29 @@ namespace Multicriteria_model.pages.settings
         /// Получить выбранный тип товара
         /// </summary>
         public string ProductType => (productType.SelectedItem as ComboBoxItem).Content.ToString();
-        /// <summary>
-        /// Страница для вывода результата
-        /// </summary>
-        public object ResultFrame
-        {
-            set
-            {
-                //results.Navigate(new Results());
-            }
-        }
-        /// <summary>
-        /// Задача выбора
-        /// </summary>
         public Task()
         {
             InitializeComponent();
         }
-        private void productType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ProductTypeChanged(object sender, SelectionChangedEventArgs e)
         {
+            Server.Name = serverName.Text;
             switch (ProductType)
             {
                 case "Покупка видеокарты":
-                    criteria.Navigate(new criteria.Videocard());
+                    criteria.Navigate(new criteria.PageVideocard(this));
                     break;
                 case "Покупка процессора":
-                    criteria.Navigate(new criteria.Processor());
+                    criteria.Navigate(new criteria.PageProcessor(this));
                     break;
                 case "Покупка оперативной памяти":
-                    criteria.Navigate(new criteria.RAM());
+                    criteria.Navigate(new criteria.PageRAM(this));
                     break;
                 case "Покупка жесткого диска":
-                    criteria.Navigate(new criteria.pageHDD(this));
+                    criteria.Navigate(new criteria.PageHDD(this));
                     break;
                 case "Покупка монитора":
-                    criteria.Navigate(new criteria.Monitor());
+                    criteria.Navigate(new criteria.PageMonitor(this));
                     break;
                 default:
                     return;

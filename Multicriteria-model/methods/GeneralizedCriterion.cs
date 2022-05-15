@@ -28,7 +28,7 @@ namespace Multicriteria_model
         public List<T> Run()
         {
             double[] summ = GenCriterion();
-            List<T> newProductList = products;
+            List<T> newProductList = new List<T>();
             for (int i = 0; i < summ.Length; i++)
             {
                 if (summ[i] == summ.Max())
@@ -45,23 +45,36 @@ namespace Multicriteria_model
             {
                 for (int j = 0; j < weights.Count; j++)
                 {
-                    summ[i] += Calculate(weights.ElementAt(j).Key, weights.ElementAt(j).Value, products, products[i]);
+                    summ[i] += Calculate(weights.ElementAt(j).Key, products, products[i]) * weights.ElementAt(j).Value;
                 }
             }
             return summ;
         }
-        private double Calculate(Characteristics currentCriteria, double currentWeight , List<T> productList, T currentProduct)
+        private double Calculate(Characteristics currentCriteria, List<T> productList, T currentProduct)
         {
-            return currentCriteria switch
+            switch (currentCriteria)
             {
-                Characteristics.Price => currentProduct.Price / productList.Max(productX => (currentProduct.Price)) * currentWeight,
-                Characteristics.Memory => ((IMemory)currentProduct).Memory / productList.Max(productX => ((IMemory)currentProduct).Memory),
-                Characteristics.Speed => ((ISpeed)currentProduct).Speed / productList.Max(productX => ((ISpeed)currentProduct).Speed),
-                Characteristics.Frequency => ((IFrequency)currentProduct).Frequency / productList.Max(productX => ((IFrequency)currentProduct).Frequency),
-                Characteristics.Cores => ((ICores)currentProduct).Cores / productList.Max(productX => ((ICores)currentProduct).Cores),
-                Characteristics.ScreenSize => ((IScreenSize)currentProduct).ScreenSize / productList.Max(productX => ((IScreenSize)currentProduct).ScreenSize),
-                _ => 0.0,
-            };
+                case (Characteristics.Price):
+                    double tmpPrice = productList.Max(productX => (productX.Price));
+                    return tmpPrice / currentProduct.Price;
+                case (Characteristics.Memory):
+                    double tmpMemory = productList.Max(productX => ((IMemory)productX).Memory);
+                    return ((IMemory)currentProduct).Memory / tmpMemory;
+                case (Characteristics.Speed):
+                    double tmpSpeed = productList.Max(productX => ((ISpeed)productX).Speed);
+                    return ((ISpeed)currentProduct).Speed / tmpSpeed;
+                case (Characteristics.Frequency):
+                    double tmpFrequency = productList.Max(productX => ((IFrequency)productX).Frequency);
+                    return ((IFrequency)currentProduct).Frequency / tmpFrequency;
+                case (Characteristics.Cores):
+                    double tmpCores = productList.Max(productX => ((ICores)productX).Cores);
+                    return ((ICores)currentProduct).Cores / tmpCores;
+                case (Characteristics.ScreenSize):
+                    double tmpScreenSize = productList.Max(productX => ((IScreenSize)productX).ScreenSize);
+                    return ((IScreenSize)currentProduct).ScreenSize / tmpScreenSize;
+                default: 
+                    return 0.0;
+            }
         }
     }
 }

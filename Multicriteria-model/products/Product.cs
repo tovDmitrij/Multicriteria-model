@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Multicriteria_model
+﻿namespace Multicriteria_model
 {
-    abstract class Product
+    public abstract class Product
     {
         public abstract string Name { get; }
         public abstract int Price { get; }

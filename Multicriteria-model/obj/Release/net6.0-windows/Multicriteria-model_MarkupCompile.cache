@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 C:\Users\Дмитрий\Desktop\Multicriteria-model\Multicriteria-model\App.xaml
-11407045341
+8-1062949333
 
-13-1968824497
-1951745643267
-MainWindow.xaml;
+261420882058
+201-404468479
+pages\criteria\HDD.xaml;pages\criteria\Monitor.xaml;pages\criteria\Processor.xaml;pages\criteria\RAM.xaml;pages\criteria\Videocard.xaml;pages\Results.xaml;pages\settings\Task.xaml;windows\main\Main.xaml;
 
-True
+False
 

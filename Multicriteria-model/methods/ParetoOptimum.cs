@@ -27,7 +27,7 @@ namespace Multicriteria_model
         public List<T> Run()
         {
             int[] summ = ParetoArray();
-            List<T> newList = products;
+            List<T> newList = new List<T>();
             for(int i = 0; i < summ.Length; i++)
             {
                 if (summ[i] == summ.Max())

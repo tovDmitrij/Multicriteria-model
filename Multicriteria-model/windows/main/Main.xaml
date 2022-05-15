@@ -30,9 +30,7 @@
     <Grid>
         <DockPanel LastChildFill="True">
             <Label DockPanel.Dock="Bottom" Content="©Кузьмин Дмитрий, 2022г." Background="#FF002D31" Width="auto" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontWeight="Normal" Foreground="#DD9A9A9A"/>
-            <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="auto">
-                <Frame NavigationUIVisibility="Hidden" x:Name="task"/>
-            </ScrollViewer>
+            <Frame NavigationUIVisibility="Hidden" x:Name="task"/>
         </DockPanel>
     </Grid>
 </Window>

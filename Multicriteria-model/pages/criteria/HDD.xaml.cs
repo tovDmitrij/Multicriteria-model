@@ -2,140 +2,84 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Data.SqlClient;
 using System;
-using System.Linq;
-
+using System.Text.RegularExpressions;
+using System.Windows.Input;
 namespace Multicriteria_model.pages.criteria
 {
     /// <summary>
-    /// Страница с критериями для <see cref="pageHDD"/>
+    /// Страница с критериями для <see cref="PageHDD"/>
     /// </summary>
-    public partial class pageHDD : Page
+    public partial class PageHDD : Page
     {
         private readonly Task parentPage;
         /// <summary>
-        /// Страница с критериями для <see cref="pageHDD"/>
+        /// Страница с критериями для <see cref="PageHDD"/>
         /// </summary>
         /// <param name="parentPage">Ссылка на страницу с задачей</param>
-        public pageHDD(Task parentPage)
+        public PageHDD(Task parentPage)
         {
             InitializeComponent();
             this.parentPage = parentPage;
         }
-        /// <summary>
-        /// 
-        /// </summary>
         private void Run(object sender, RoutedEventArgs e)
         {
-            List<List<string>> list = DBConnection();
-            List<HDD> products = GetProducts(list);
-
-            #region Лексикографическая оптимизация
-            SortedDictionary<byte, Characteristics> criteria = Criteria();
-            List<HDD> lexicographisResultList = new Lexicographic<HDD>(products, criteria).Run();
-            string lexicographicResult = "\tЛексикографическая оптимизация:\n";
-            foreach (var item in lexicographisResultList)
+            Criteria<HDD> criteria = new Criteria<HDD>();
+            List<List<string>> productStringList = criteria.Initialize();
+            List<HDD> products = GetProducts(productStringList);
+            if (products == null || products.Count == 0)
             {
-                lexicographicResult += $"{item.Print}\n";
+                MessageBox.Show("База данных пустая!");
+                return;
             }
-            #endregion
-
-            #region Субоптимизация
-            SortedDictionary<Characteristics, double> criteriaWithBorder = CriteriaWithBorder();
-            List<HDD> suboptimizationResultList = new Suboptimization<HDD>(products, criteria.First().Value, criteriaWithBorder).Run();
-            string subResult = "\tСубоптимизация:\n";
-            foreach (var item in suboptimizationResultList)
+            SortedDictionary<Characteristics, double> criteriaWithBorderList = new SortedDictionary<Characteristics, double>();
+            SortedDictionary<byte, Characteristics> criteriaList = new SortedDictionary<byte, Characteristics>();
+            try
             {
-                subResult += $"{item.Print}\n";
+                criteriaWithBorderList.Add(Characteristics.Price, -1 * Convert.ToDouble(priceValue.Text));
+                criteriaWithBorderList.Add(Characteristics.Speed, Convert.ToDouble(speedValue.Text));
+                criteriaWithBorderList.Add(Characteristics.Memory, Convert.ToDouble(memoryValue.Text));
+                criteriaList.Add(Convert.ToByte(pricePriority.Text), Characteristics.Price);
+                criteriaList.Add(Convert.ToByte(speedPriority.Text), Characteristics.Speed);
+                criteriaList.Add(Convert.ToByte(memoryPriority.Text), Characteristics.Memory);
             }
-            #endregion
-
-            #region Указание нижних границ критериев
-            List<HDD> lcbResultList = new LowerCriteriaBorders<HDD>(products, criteriaWithBorder).Run();
-            string lcbResult = "\tУказание нижних границ критериев:\n";
-            foreach (var item in lcbResultList)
+            catch (Exception ex)
             {
-                lcbResult += $"{item.Print}\n";
+                MessageBox.Show($"ОШИБКА ВВОДА ДАННЫХ:\n{ex}");
+                return;
             }
-            #endregion
-
-            #region Обобщенный критерий
-            SortedDictionary<Characteristics, double> criteriaWithWeights = CriteriaWithWeights(criteria);
-            List<HDD> gcResultList = new GeneralizedCriterion<HDD>(products, criteriaWithWeights).Run();
-            string gcResult = "\tОбобщенный критерий:\n";
-            foreach (var item in gcResultList)
-            {
-                gcResult += $"{item.Print}\n";
-            }
-            #endregion
-
-            #region Формирование множества Паретто
-            List<HDD> poResultList = new ParetoOptimum<HDD>(products).Run();
-            string poResult = "\tФормирование множества Паретто\n";
-            foreach (var item in poResultList)
-            {
-                poResult += $"{item.Print}\n";
-            }
-            #endregion
-
-            parentPage.results.Navigate(new Results(
-                "*краткий результат*",
-                $"{lexicographicResult}\n" +
-                $"{subResult}\n" +
-                $"{lcbResult}\n" +
-                $"{gcResult}\n" +
-                $"{poResult}"));
+            parentPage.results.Navigate(new Results(criteria.Run(
+                products,
+                criteriaWithBorderList,
+                criteriaList
+                )));
         }
-        private List<List<string>> DBConnection()
+        private static List<HDD> GetProducts(List<List<string>> productStringList)
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-R2N8P3B;Initial Catalog=DB_Goods;Integrated Security=True");
-            string sql = $"select* from HDD";
-            sqlConnection.Open();
-            SqlCommand cmd = new SqlCommand(sql, sqlConnection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            List<List<string>> list = new List<List<string>>();
-            while (reader.Read())
-                list.Add(new List<string>() { $"{reader.GetValue(0)}", $"{reader.GetValue(1)}", $"{reader.GetValue(2)}", $"{reader.GetValue(3)}" });
-            return list;
-        }
-        private SortedDictionary<byte, Characteristics> Criteria()
-        {
-            SortedDictionary<byte, Characteristics> criteria = new SortedDictionary<byte, Characteristics>();
-            criteria.Add(Convert.ToByte(pricePriority.Text), Characteristics.Price);
-            criteria.Add(Convert.ToByte(speedPriority.Text), Characteristics.Speed);
-            criteria.Add(Convert.ToByte(memoryPriority.Text), Characteristics.Memory);
-            return criteria;
-        }
-        private SortedDictionary<Characteristics, double> CriteriaWithBorder()
-        {
-            SortedDictionary<Characteristics, double> criteria = new SortedDictionary<Characteristics, double>();
-            criteria.Add(Characteristics.Price, -1 * Convert.ToDouble(priceValue.Text));
-            criteria.Add(Characteristics.Speed, Convert.ToDouble(speedValue.Text));
-            criteria.Add(Characteristics.Memory, Convert.ToDouble(memoryValue.Text));
-            return criteria;
-        }
-        private SortedDictionary<Characteristics, double> CriteriaWithWeights(SortedDictionary<byte, Characteristics> criteriaList)
-        {
-            SortedDictionary<Characteristics, double> criteriaWeights = new SortedDictionary<Characteristics, double>();
-            double weight = 1;
-            int count = 1;
-            foreach(var item in criteriaList)
+            List<HDD> productList = new List<HDD>();
+            try
             {
-                double currentWeight = weight / count;
-                criteriaWeights.Add(item.Value, currentWeight);
-                count++;
+                foreach (var item in productStringList)
+                {
+                    productList.Add(new HDD(item[0], Convert.ToUInt32(item[1]), Convert.ToUInt32(item[2]), Convert.ToInt32(item[3])));
+                }
             }
-            return criteriaWeights;
-        }
-        private List<HDD> GetProducts(List<List<string>> list)
-        {
-            List<HDD> products = new List<HDD>();
-            foreach (var k in list)
+            catch(Exception ex)
             {
-                products.Add(new HDD(k[0], Convert.ToUInt32(k[1]), Convert.ToUInt32(k[2]), Convert.ToInt32(k[3])));
+                MessageBox.Show($"ОШИБКА:\n{ex}");
+                    return productList;
             }
-            return products;
+            return productList;
+        }
+        private void PreviewValueInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        private void PreviewPriorityInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^1-3]");
+            e.Handled = regex.IsMatch(e.Text) || ((TextBox)sender).Text.Length >= 1;
         }
     }
 }

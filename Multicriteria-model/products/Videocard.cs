@@ -28,4 +28,3 @@ namespace Multicriteria_model
         public override string Print => $"Видеокарта {name} {videoMemory} ГБ {frequency} МГц {Math.Abs(price)} ₽";
     }
 }
-

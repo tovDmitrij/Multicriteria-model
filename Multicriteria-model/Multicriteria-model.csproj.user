@@ -28,9 +28,6 @@
     <Compile Update="pages\settings\Task.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="windows\welcome\HelloWorld.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="pages\criteria\HDD.xaml">
@@ -52,9 +49,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="pages\settings\Task.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="windows\welcome\HelloWorld.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
