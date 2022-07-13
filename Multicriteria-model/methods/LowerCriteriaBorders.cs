@@ -1,48 +1,44 @@
-﻿/* Указание нижних границ критериев
-
-По всем критериям назначаются нижние границы.
-Оптимальным при этом считается исход, удовлетворяющий всем нижним границам критериев.
-
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 namespace Multicriteria_model
 {
     /// <summary>
     /// Указание нижних границ критериев
     /// </summary>
-    internal sealed class LowerCriteriaBorders<T> where T : Product
+    internal sealed class LowerCriteriaBorders
     {
-        private readonly List<T> products;
-        private readonly SortedDictionary<Characteristics, double> criteria;
-        /// <param name="products">Список <see cref="T"/> товаров</param>
-        /// <param name="criteria">Список <see cref="Characteristics"/> критериев и их <see cref="double"/> нижние границы</param>
-        public LowerCriteriaBorders(List<T> products, SortedDictionary<Characteristics, double> criteria)
+        private readonly List<Product> _products;
+        private readonly SortedDictionary<Characteristic, double> _criteria;
+        /// <summary>
+        /// Указание нижних границ критериев
+        /// </summary>
+        /// <param name="products">Список товаров</param>
+        /// <param name="criteria">Список  критериев и их нижние границы</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public LowerCriteriaBorders(List<Product> products, SortedDictionary<Characteristic, double> criteria)
         {
-            this.products = products;
-            this.criteria = criteria;
+            _products = products ?? throw new ArgumentNullException(nameof(products),
+                "Ошибка в указании нижних границ критериев:\nОтсутствует список товаров!");
+            _criteria = criteria ?? throw new ArgumentNullException(nameof(criteria),
+                "Ошибка в указании нижних границ критериев:\nОтсутствует список критериев!");
         }
         /// <summary>
         /// Указание нижних границ критериев
         /// </summary>
-        /// <returns>Список <see cref="T"/> товаров</returns>
-        public List<T> Run()
+        /// <returns>Список товаров</returns>
+        public List<Product> Run()
         {
-            List<T> productList = products;
-            for (byte i = 0; i < criteria.Count; i++)
+            List<Product> productList = _products;
+            for (byte i = 0; i < _criteria.Count; i++)
             {
                 try
                 {
-                    productList = productList.FindAll(criteria.ElementAt(i).Key, criteria.ElementAt(i).Value);
+                    productList = productList.FindAll(_criteria.ElementAt(i).Key, _criteria.ElementAt(i).Value);
                 }
                 catch (Exception ex)
                 {
-                    string exception = "Ошибка в субоптимизации:\n";
-                    exception += productList is null ? "Список товаров пустой!" : $"{ex}";
-                    MessageBox.Show($"{exception}");
-                    return productList;
+                    throw new Exception($"Ошибка в указании нижних границ критериев:\n{ex.Message}");
                 }
             }
             return productList;

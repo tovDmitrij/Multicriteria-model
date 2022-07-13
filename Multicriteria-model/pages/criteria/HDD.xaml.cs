@@ -43,7 +43,7 @@ namespace Multicriteria_model.pages.criteria
                 criteriaList.Add(Convert.ToByte(speedPriority.Text), Characteristics.Speed);
                 criteriaList.Add(Convert.ToByte(memoryPriority.Text), Characteristics.Memory);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show($"ОШИБКА ВВОДА ДАННЫХ:\n{ex}");
                 return;
@@ -64,7 +64,7 @@ namespace Multicriteria_model.pages.criteria
                     productList.Add(new HDD(item[0], Convert.ToUInt32(item[1]), Convert.ToUInt32(item[2]), Convert.ToInt32(item[3])));
                 }
             }
-            catch(Exception ex)
+            catch(System.Exception ex)
             {
                 MessageBox.Show($"ОШИБКА:\n{ex}");
                     return productList;

@@ -1,76 +1,55 @@
-﻿/* Формирование множества Паретто
-
-По заданному массиву альтернатив находится множество [i,j] Парето-оптимальных исходов (ParetoArray()),
-из которого выбор оптимального исхода определяется как максимальная j-я сумма Парето-оптимального исхода
-для текущей альтернативы.
-
-*/
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 namespace Multicriteria_model
 {
     /// <summary>
-    /// Формирование множества Паретто
+    /// Формирование множества Парето
     /// </summary>
-    internal sealed class ParetoOptimum<T> where T : Product
+    internal sealed class ParetoOptimum
     {
-        private readonly List<T> products;
-        /// <param name="products">Список <see cref="T"/> товаров</param>
-        public ParetoOptimum(List<T> products)
+        private readonly List<Product> _products;
+        /// <summary>
+        /// Формирование множества Парето
+        /// </summary>
+        /// <param name="products">Список товаров</param>
+        public ParetoOptimum(List<Product> products)
         {
-            this.products = products;
+            _products = products ?? throw new ArgumentNullException(nameof(products),
+                "Ошибка в формировании множества Парето:\nОтсутствует список товаров!");
         }
         /// <summary>
-        /// Формирование множества Паретто
+        /// Формирование множества Парето
         /// </summary>
-        /// <returns>Список <see cref="T"/> товаров</returns>
-        public List<T> Run()
+        /// <returns>Список товаров</returns>
+        public List<Product> Run()
         {
             int[] summ = ParetoArray();
-            List<T> newList = new List<T>();
+            List<Product> newList = new();
             for(int i = 0; i < summ.Length; i++)
             {
                 if (summ[i] == summ.Max())
                 {
-                        newList.Add(products[i]);
+                        newList.Add(_products[i]);
                 }
             }
             return newList;
         }
         private int[] ParetoArray()
         {
-            int[,] paretoArray = new int[products.Count, products.Count];
-            int[] summ = new int[products.Count];
-            List<T> productList = products;
+            int[,] paretoArray = new int[_products.Count, _products.Count];
+            int[] summ = new int[_products.Count];
+            List<Product> productList = _products;
             for (int i = 0; i < productList.Count; i++)
             {
                 for (int j = 0; j < summ.Length; j++)
                 {
-                    if (productList[i] is ISpeed productFirstSpeed && productList[j] is ISpeed productSecondSpeed)
+                    foreach (var currentChar in productList[i].Characteristics)
                     {
-                        paretoArray[i, j] += productFirstSpeed.Speed > productSecondSpeed.Speed ? 1 : 0;
+                        paretoArray[j, i] += currentChar.Value > productList[j].Characteristics.Find(
+                            itemX => itemX.Name == currentChar.Name) ? 1 : 0;
                     }
-                    if (productList[i] is IMemory productFirstMemory && productList[j] is IMemory productSecondMemory)
-                    {
-                        paretoArray[i, j] += productFirstMemory.Memory > productSecondMemory.Memory ? 1 : 0;
-                    }
-                    if (productList[i] is IFrequency productFirstFrequency && productList[j] is IFrequency productSecondFrequency)
-                    { 
-                        paretoArray[i, j] += productFirstFrequency.Frequency > productSecondFrequency.Frequency ? 1 : 0;
-                    }
-                    if (productList[i] is ICores productFirstCores && productList[j] is ICores productSecondCores)
-                    {
-                        paretoArray[i, j] += productFirstCores.Cores > productSecondCores.Cores ? 1 : 0;
-                    }
-                    if (productList[i] is IScreenSize productFirstScreenSize && productList[j] is IScreenSize productSecondScreenSize)
-                    { 
-                        paretoArray[i, j] += productFirstScreenSize.ScreenSize > productSecondScreenSize.ScreenSize ? 1 : 0;
-                    }
-                    if (productList[i] is Product productFirst && productList[j] is Product productSecond)
-                    {
-                        paretoArray[i, j] += productFirst.Price < productSecond.Price ? 1 : 0;
-                    }
-                    summ[i] += paretoArray[i, j] > 1 ? 1 : paretoArray[i, j];
+                    summ[i] += paretoArray[j, i] > 1 ? 1 : 0;
                 }
             }
             return summ;

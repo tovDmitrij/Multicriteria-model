@@ -1,80 +1,62 @@
-﻿/* Обобщенный критерий
-
-Процедура, которая "синтезирует" набор оценок по заданным критериям
-
-*/
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 namespace Multicriteria_model
 {
     /// <summary>
-    /// Обобщенный критерий
+    /// Обобщённый критерий
     /// </summary>
-    internal sealed class GeneralizedCriterion<T> where T : Product
+    internal sealed class GeneralizedCriterion
     {
-        private readonly List<T> products;
-        private readonly SortedDictionary<Characteristics, double> weights;
-        /// <param name="products">Список <see cref="T"/> товаров</param>
-        /// <param name="weights">Список <see cref="SortedDictionary"/> весов критериев</param>
-        public GeneralizedCriterion(List<T> products, SortedDictionary<Characteristics, double> weights)
+        private readonly List<Product> _products;
+        private readonly SortedDictionary<Characteristic, double> _weights;
+        /// <summary>
+        /// Обобщённый критерий
+        /// </summary>
+        /// <param name="products">Список товаров</param>
+        /// <param name="weights">Список весов критериев</param>
+        public GeneralizedCriterion(List<Product> products, SortedDictionary<Characteristic, double> weights)
         {
-            this.products = products;
-            this.weights = weights;
+            _products = products ?? throw new ArgumentNullException(nameof(products),
+                "Ошибка в обобщённом критерии:\nОтсутствует список товаров!");
+            _weights = weights ?? throw new ArgumentNullException(nameof(weights),
+                "Ошибка в обобщённом критерии:\nОтсутствует список весов!");
         }
         /// <summary>
-        /// Обобщенный критерий
+        /// Обобщённый критерий
         /// </summary>
-        /// <returns>Список <see cref="T"/> товаров</returns>
-        public List<T> Run()
+        /// <returns>Список товаров</returns>
+        public List<Product> Run()
         {
             double[] summ = GenCriterion();
-            List<T> newProductList = new List<T>();
+            List<Product> newProductList = new();
             for (int i = 0; i < summ.Length; i++)
             {
                 if (summ[i] == summ.Max())
                 {
-                    newProductList.Add(products[i]);
+                    newProductList.Add(_products[i]);
                 }
             }
             return newProductList;
         }
         private double[] GenCriterion()
         {
-            double[] summ = new double[products.Count];
-            for(int i = 0; i < products.Count; i++)
+            double[] summ = new double[_products.Count];
+            for(int i = 0; i < _products.Count; i++)
             {
-                for (int j = 0; j < weights.Count; j++)
+                for (int j = 0; j < _weights.Count; j++)
                 {
-                    summ[i] += Calculate(weights.ElementAt(j).Key, products, products[i]) * weights.ElementAt(j).Value;
+                    summ[i] += Calculate(_weights.ElementAt(j).Key, _products, _products[i]) * _weights.ElementAt(j).Value;
                 }
             }
             return summ;
         }
-        private double Calculate(Characteristics currentCriteria, List<T> productList, T currentProduct)
+        private double Calculate(Characteristic currentCriteria, List<Product> productList, Product currentProduct)
         {
-            switch (currentCriteria)
-            {
-                case (Characteristics.Price):
-                    double tmpPrice = productList.Max(productX => (productX.Price));
-                    return tmpPrice / currentProduct.Price;
-                case (Characteristics.Memory):
-                    double tmpMemory = productList.Max(productX => ((IMemory)productX).Memory);
-                    return ((IMemory)currentProduct).Memory / tmpMemory;
-                case (Characteristics.Speed):
-                    double tmpSpeed = productList.Max(productX => ((ISpeed)productX).Speed);
-                    return ((ISpeed)currentProduct).Speed / tmpSpeed;
-                case (Characteristics.Frequency):
-                    double tmpFrequency = productList.Max(productX => ((IFrequency)productX).Frequency);
-                    return ((IFrequency)currentProduct).Frequency / tmpFrequency;
-                case (Characteristics.Cores):
-                    double tmpCores = productList.Max(productX => ((ICores)productX).Cores);
-                    return ((ICores)currentProduct).Cores / tmpCores;
-                case (Characteristics.ScreenSize):
-                    double tmpScreenSize = productList.Max(productX => ((IScreenSize)productX).ScreenSize);
-                    return ((IScreenSize)currentProduct).ScreenSize / tmpScreenSize;
-                default: 
-                    return 0.0;
-            }
+            double maxValue = productList.Max(
+                productY => productY.Characteristics.Find(
+                    criteriaY => criteriaY.Name == currentCriteria.Name).Value);
+            return currentCriteria.Value / maxValue;
         }
     }
 }

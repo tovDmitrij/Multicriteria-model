@@ -1,55 +1,50 @@
-﻿/* Субоптимизация
-
-Выделяется один из критериев, а по всем остальным критериям назначаются нижние границы.
-Оптимальным при этом считается исход, максимизирующий выделенный критерий на множестве исходов,
-оценки которых по остальным притерием не ниже назначенных.
-
-*/
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using System;
 namespace Multicriteria_model
 {
     /// <summary>
     /// Субоптимизация
     /// </summary>
-    internal sealed class Suboptimization<T> where T : Product
+    internal sealed class Suboptimization
     {
-        private readonly List<T> products;
-        private readonly SortedDictionary<Characteristics, double> criteria;
-        private readonly Characteristics mainCriterion;
-        /// <param name="products">Список <see cref="T"/> товаров</param>
-        /// <param name="mainCriterion">Главный <see cref="Characteristics"/> критерий</param>
-        /// <param name="criteria">Список <see cref="Characteristics"/> критериев и их <see cref="double"/> нижние границы</param>
-        public Suboptimization(List<T> products, Characteristics mainCriterion, SortedDictionary<Characteristics, double> criteria)
+        private readonly List<Product> _products;
+        private readonly SortedDictionary<Characteristic, double> _criteria;
+        private readonly Characteristic _mainCriterion;
+        /// <summary>
+        /// Субоптимизация
+        /// </summary>
+        /// <param name="products">Список товаров</param>
+        /// <param name="mainCriterion">Главный критерий</param>
+        /// <param name="criteria">Список критериев и их нижние границы</param>
+        public Suboptimization(List<Product> products, Characteristic mainCriterion, SortedDictionary<Characteristic, double> criteria)
         {
-            this.products = products;
-            this.mainCriterion = mainCriterion;
-            this.criteria = criteria;
+            _products = products ?? throw new ArgumentNullException(nameof(products),
+                "Ошибка в субоптимизации:\nОтсутствует список товаров!");
+            _mainCriterion = mainCriterion ?? throw new ArgumentNullException(nameof(mainCriterion),
+                "Ошибка в субоптимизации:\nНе был задан главный критерий!");
+            _criteria = criteria ?? throw new ArgumentNullException(nameof(criteria),
+                "Ошибка в субоптимизации:\nОтсутствует список критериев!");
         }
         /// <summary>
         /// Субоптимизация
         /// </summary>
-        /// <returns>Список <see cref="T"/> товаров</returns>
-        public List<T> Run()
+        /// <returns>Список товаров</returns>
+        public List<Product> Run()
         {
-            List<T> productList = products;
-            for (byte i = 0; i < criteria.Count; i++)
+            List<Product> productList = _products;
+            for (byte i = 0; i < _criteria.Count; i++)
             {
                 try
                 {
-                    productList = productList.FindAll(criteria.ElementAt(i).Key, criteria.ElementAt(i).Value);
+                    productList = productList.FindAll(_criteria.ElementAt(i).Key, _criteria.ElementAt(i).Value);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    string exception = "Ошибка в субоптимизации:\n";
-                    exception += productList is null ? "Список товаров пустой!" : $"{ex}";
-                    MessageBox.Show($"{exception}");
-                    return productList;
+                    throw new Exception($"Ошибка в субоптимизации:\n{ex.Message}");
                 }
             }
-            return productList.FindAll(mainCriterion);
+            return productList.FindAll(_mainCriterion);
         }
     }
 }

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Windows;
 namespace Multicriteria_model
 {
     /// <summary>
-    /// Сервер с БД товаров
+    /// Сервер с БД товаров (MSSQL)
     /// </summary>
     internal static class Server
     {
         /// <summary>
-        /// Название сервера
+        /// Наименование сервера
         /// </summary>
         public static string Name { get; set; }
         /// <summary>
@@ -18,23 +17,32 @@ namespace Multicriteria_model
         /// </summary>
         /// <param name="productType">Тип товара</param>
         /// <returns>Список товаров</returns>
-        public static List<List<string>> DBConnection(Type type)
+        public static List<Product> GetProducts(string productType)
         {
+            #region Подключение к БД
+
+            string DataBase = "DB_Goods";
+            if (Name == "" || Name == null)
+            {
+                throw new ArgumentNullException(nameof(Name), 
+                    "Наименование сервера пустое!");
+            }
             SqlConnection sqlConnection;
-            string sql = $"select* from {type.Name}";
             try
             {
-                if (Name == null || Name == "")
-                    throw new Exception();
-                sqlConnection = new SqlConnection(@$"Data Source={Name};Initial Catalog=DB_Goods;Integrated Security=True");
+                sqlConnection = new SqlConnection(@$"Data Source={Name};Initial Catalog={DataBase};Integrated Security=True");
                 sqlConnection.Open();
             }
             catch
             {
-                MessageBox.Show("Сервер не найден!");
-                return null;
+                throw new System.Exception($"Сервер с наименованием {Name} не найден!");
             }
+
+            #endregion
+            #region Изъятие из БД записей
+
             SqlDataReader reader;
+            string sql = $"select* from {productType}";
             try
             {
                 SqlCommand cmd = new SqlCommand(sql, sqlConnection);
@@ -42,15 +50,34 @@ namespace Multicriteria_model
             }
             catch
             {
-                MessageBox.Show("Неправильно составлен SQL-запрос!");
-                return null;
+                throw new System.Exception($"Неправильно составлен SQL-запрос!\n{sql}");
             }
-            List<List<string>> productStringList = new List<List<string>>();
+
+            #endregion
+            #region Преобразование записей в список товаров
+
+            List<Product> productList = new();
             while (reader.Read())
             {
-                productStringList.Add(new List<string>() { $"{reader.GetValue(0)}", $"{reader.GetValue(1)}", $"{reader.GetValue(2)}", $"{reader.GetValue(3)}" });
+                List<Characteristic> characteristics = new();
+                int index = 0;
+                while (true)
+                {
+                    try
+                    {
+                        characteristics.Add(new Characteristic(reader.GetName(index), reader.GetValue(index)));
+                        index++;
+                    }
+                    catch
+                    {
+                        break;
+                    }
+                }
+                productList.Add(new Product(characteristics));
             }
-            return productStringList;
+            return productList;
+
+            #endregion
         }
     }
 }
