@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Multicriteria_model.pages.settings"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextElement.FontWeight="Regular"
@@ -22,56 +21,77 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-            <Grid>
-                <Border>
-                    <ScrollViewer Background="#FF003238" Foreground="#FF004048" VerticalScrollBarVisibility="Visible">
-                        <DockPanel Background="#FF003238" LastChildFill="False">
-                            <Label DockPanel.Dock="Top" Margin="5,5,5,0" Background="#FF00262B" Content="НАСТРОЙКИ" HorizontalContentAlignment="Center" Width="auto" FontSize="20" VerticalAlignment="Center" Foreground="#DDD2D2D2"/>
-                            <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="ЗАДАЧА" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
-                                <Label.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <LinearGradientBrush.RelativeTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                                <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </LinearGradientBrush.RelativeTransform>
-                                        <GradientStop Color="#FF004546"/>
-                                        <GradientStop Color="#FF003238" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Label.Background>
-                            </Label>
-                            <ComboBox  DockPanel.Dock="Top" x:Name="productType" Margin="5,0,5,0" VerticalAlignment="Top" SelectionChanged="ProductTypeChanged" FontSize="16" materialDesign:HintAssist.Hint="Выберите задачу" Foreground="#DDD2D2D2" Background="#FF00282D">
-                                <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка видеокарты"/>
-                                <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка процессора"/>
-                                <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка оперативной памяти"/>
-                                <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка жесткого диска"/>
-                                <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка монитора"/>
-                            </ComboBox>
-                            <Label DockPanel.Dock="Top" Margin="5,5,5,0" Background="#FF00262B" Content="ПРОДВИНУТЫЕ" HorizontalContentAlignment="Center" Width="auto" FontSize="20" VerticalAlignment="Center" Foreground="Red"/>
-                            <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="ИМЯ СЕРВЕРА" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
-                                <Label.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <LinearGradientBrush.RelativeTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                                <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </LinearGradientBrush.RelativeTransform>
-                                        <GradientStop Color="#FF004546"/>
-                                        <GradientStop Color="#FF003238" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Label.Background>
-                            </Label>
-                        <TextBox DockPanel.Dock="Top" x:Name="serverName" Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите название сервера" Cursor="Arrow"></TextBox>
-                    </DockPanel>
-                </ScrollViewer>
-                </Border>
-            </Grid>
+        <ScrollViewer Background="#FF003238" Foreground="#FF004048" VerticalScrollBarVisibility="Visible">
+            <DockPanel Background="#FF003238" LastChildFill="False">
+                <Label DockPanel.Dock="Top" Margin="5,5,5,0" Background="#FF00262B" Content="НАСТРОЙКИ" HorizontalContentAlignment="Center" Width="auto" FontSize="20" VerticalAlignment="Center" Foreground="#DDD2D2D2"/>
+
+                <!--ЗАДАЧА-->
+
+                <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="ЗАДАЧА" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
+                    <Label.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                    <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF004546"/>
+                            <GradientStop Color="#FF003238" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Label.Background>
+                </Label>
+                <ComboBox  DockPanel.Dock="Top" x:Name="productType" Margin="5,0,5,0" VerticalAlignment="Top" SelectionChanged="ProductTypeChanged" FontSize="16" materialDesign:HintAssist.Hint="Выберите задачу" Foreground="#DDD2D2D2" Background="#FF00282D">
+                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка видеокарты"/>
+                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка процессора"/>
+                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка оперативной памяти"/>
+                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка жесткого диска"/>
+                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка монитора"/>
+                </ComboBox>
+
+                <!--ИМЯ СЕРВЕРА-->
+
+                <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="ИМЯ СЕРВЕРА" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
+                    <Label.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                    <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF004546"/>
+                            <GradientStop Color="#FF003238" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Label.Background>
+                </Label>
+                <TextBox DockPanel.Dock="Top" x:Name="serverName" Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите название сервера" Cursor="Arrow"></TextBox>
+
+                <!--БД С ТОВАРАМИ-->
+
+                <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="БД ТОВАРОВ" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
+                    <Label.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                    <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF004546"/>
+                            <GradientStop Color="#FF003238" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Label.Background>
+                </Label>
+                <TextBox DockPanel.Dock="Top" x:Name="dbName" Foreground="#DDD2D2D2" FontSize="14" materialDesign:HintAssist.Hint="Введите название БД" Cursor="Arrow"></TextBox>
+            </DockPanel>
+        </ScrollViewer>
         <DockPanel Grid.Column="1" LastChildFill="True">
             <Frame NavigationUIVisibility="Hidden" x:Name="criteria" Padding="10,10,5,10"/>
             <Frame NavigationUIVisibility="Hidden" x:Name="results" Padding="5,10,10,10"/>

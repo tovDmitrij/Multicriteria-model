@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-namespace Multicriteria_model.pages.settings
+namespace Multicriteria_model
 {
     /// <summary>
     /// Задача выбора

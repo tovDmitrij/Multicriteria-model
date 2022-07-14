@@ -6,7 +6,7 @@ namespace Multicriteria_model
         public Main()
         {
             InitializeComponent();
-            task.Navigate(new pages.settings.Task());
+            task.Navigate(new Task());
         }
     }
 }

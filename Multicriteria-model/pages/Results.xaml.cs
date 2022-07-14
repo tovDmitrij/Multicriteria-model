@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
-namespace Multicriteria_model.pages
+namespace Multicriteria_model
 {
     /// <summary>
     /// Вывод результата на форму
     /// </summary>
     public partial class Results : Page
     {
-        private readonly string error = "\nТОВАРЫ ОТСУТСТВУЮТ!\n";
+        private readonly string error = "\nТовары отсутствуют!\n";
         /// <summary>
         /// Выводит результат на форму
         /// </summary>

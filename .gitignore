@@ -556,3 +556,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Multicriteria-model/DNS-parser/.vscode
