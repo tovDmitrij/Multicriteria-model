@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Multicriteria_model.pages.criteria
+namespace Multicriteria_model.pages
 {
     /// <summary>
-    /// Логика взаимодействия для criteriaElement.xaml
+    /// Логика взаимодействия для Criteria.xaml
     /// </summary>
-    public partial class criteriaElement : UserControl
+    public partial class Criteria : Page
     {
-        public criteriaElement()
+        public Criteria()
         {
             InitializeComponent();
         }
