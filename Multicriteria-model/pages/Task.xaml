@@ -43,12 +43,12 @@
                         </LinearGradientBrush>
                     </Label.Background>
                 </Label>
-                <ComboBox  DockPanel.Dock="Top" x:Name="productType" Margin="5,0,5,0" VerticalAlignment="Top" SelectionChanged="ProductTypeChanged" FontSize="16" materialDesign:HintAssist.Hint="Выберите задачу" Foreground="#DDD2D2D2" Background="#FF00282D">
-                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка видеокарты"/>
-                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка процессора"/>
-                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка оперативной памяти"/>
-                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка жесткого диска"/>
-                    <ComboBoxItem Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка монитора"/>
+                <ComboBox DockPanel.Dock="Top" x:Name="productType" Margin="5,0,5,0" VerticalAlignment="Top" SelectionChanged="ProductTypeChanged" FontSize="16" materialDesign:HintAssist.Hint="Выберите задачу" Foreground="#DDD2D2D2" Background="#FF00282D">
+                    <ComboBoxItem Uid="Videocard"  Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка видеокарты"/>
+                    <ComboBoxItem Uid="Processor" Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка процессора"/>
+                    <ComboBoxItem Uid="RAM" Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка оперативной памяти"/>
+                    <ComboBoxItem Uid="HDD" Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка жесткого диска"/>
+                    <ComboBoxItem Uid="Monitor" Foreground="#DDD2D2D2" Background="#FF00282D" Content="Покупка монитора"/>
                 </ComboBox>
 
                 <!--ИМЯ СЕРВЕРА-->

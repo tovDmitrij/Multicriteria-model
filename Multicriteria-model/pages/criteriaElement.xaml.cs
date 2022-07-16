@@ -1,28 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 namespace Multicriteria_model
 {
     /// <summary>
-    /// Логика взаимодействия для criteriaElement.xaml
+    /// Критерий фильтрации списка товаров
     /// </summary>
-    public partial class criteriaElement : UserControl
+    public partial class CriteriaElement : UserControl
     {
-        public criteriaElement()
+        /// <summary>
+        /// Наименование критерия
+        /// </summary>
+        public string Name => criteriaName.Content.ToString();
+        /// <summary>
+        /// Значение критерия
+        /// </summary>
+        public string Value => criteriaValue.Text;
+        /// <summary>
+        /// Приоритет критерия
+        /// </summary>
+        public uint Priority => Convert.ToUInt32(criteriaPriority.Text);
+        /// <summary>
+        /// Критерий фильтрации списка товаров
+        /// </summary>
+        /// <param name="name">Наименование критерия</param>
+        /// <param name="value">Значение критерия</param>
+        public CriteriaElement(string name, string value)
         {
             InitializeComponent();
+            criteriaName.Content = name;
+            criteriaValue.Text = value;
         }
     }
 }

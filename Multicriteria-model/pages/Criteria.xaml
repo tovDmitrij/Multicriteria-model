@@ -7,8 +7,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Criteria">
-
     <Grid>
-        
+        <StackPanel>
+            <ListBox x:Name="criteriaListBox"/>
+        </StackPanel>
     </Grid>
 </Page>

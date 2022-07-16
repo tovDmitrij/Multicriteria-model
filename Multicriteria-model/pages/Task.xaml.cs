@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 namespace Multicriteria_model
 {
     /// <summary>
@@ -7,10 +6,6 @@ namespace Multicriteria_model
     /// </summary>
     public sealed partial class Task : Page
     {
-        /// <summary>
-        /// Получить выбранный тип товара
-        /// </summary>
-        public string ProductType => (productType.SelectedItem as ComboBoxItem).Content.ToString();
         public Task()
         {
             InitializeComponent();
@@ -18,26 +13,8 @@ namespace Multicriteria_model
         private void ProductTypeChanged(object sender, SelectionChangedEventArgs e)
         {
             Server.Name = serverName.Text;
-            switch (ProductType)
-            {
-                case "Покупка видеокарты":
-                    criteria.Navigate(new criteria.PageVideocard(this));
-                    break;
-                case "Покупка процессора":
-                    criteria.Navigate(new criteria.PageProcessor(this));
-                    break;
-                case "Покупка оперативной памяти":
-                    criteria.Navigate(new criteria.PageRAM(this));
-                    break;
-                case "Покупка жесткого диска":
-                    criteria.Navigate(new criteria.PageHDD(this));
-                    break;
-                case "Покупка монитора":
-                    criteria.Navigate(new criteria.PageMonitor(this));
-                    break;
-                default:
-                    return;
-            }
+            string productType = (this.productType.SelectedItem as ComboBoxItem).Uid;
+            criteria.Navigate(new Criteria(this, productType));
         }
     }
 }
