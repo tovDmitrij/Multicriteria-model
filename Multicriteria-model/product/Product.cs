@@ -1,23 +1,24 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 namespace Multicriteria_model
 {
     /// <summary>
     /// Товар
     /// </summary>
-    public sealed class Product
+    public struct Product
     {
-        private readonly List<Characteristic> _characteristics;
+        private readonly Characteristic[] _characteristics;
         /// <summary>
         /// Список характеристик товара
         /// </summary>
-        public List<Characteristic> Characteristics => _characteristics;
+        public Characteristic[] Characteristics => _characteristics;
         /// <summary>
         /// Товар
         /// </summary>
         /// <param name="characteristics">Список характеристик товара</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public Product(List<Characteristic> characteristics)
+        public Product(Characteristic[] characteristics)
         {
             _characteristics = characteristics ?? 
                 throw new ArgumentNullException(nameof(characteristics),
@@ -28,7 +29,7 @@ namespace Multicriteria_model
             string result = "";
             foreach (var currentChar in _characteristics)
             {
-                result += $"{currentChar.Name}: {currentChar.Value}; ";
+                result += $"{currentChar.Name}: {currentChar.Value};\n";
             }
             return result;
         }

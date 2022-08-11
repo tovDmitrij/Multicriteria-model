@@ -8,15 +8,15 @@ namespace Multicriteria_model
     /// </summary>
     internal sealed class LowerCriteriaBorders
     {
-        private readonly List<Product> _products;
-        private readonly SortedDictionary<Characteristic, double> _criteria;
+        private readonly Product[] _products;
+        private readonly Characteristic[] _criteria;
         /// <summary>
         /// Указание нижних границ критериев
         /// </summary>
         /// <param name="products">Список товаров</param>
         /// <param name="criteria">Список  критериев и их нижние границы</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public LowerCriteriaBorders(List<Product> products, SortedDictionary<Characteristic, double> criteria)
+        public LowerCriteriaBorders(Product[] products, Characteristic[] criteria)
         {
             _products = products ?? throw new ArgumentNullException(nameof(products),
                 "Ошибка в указании нижних границ критериев:\nОтсутствует список товаров!");
@@ -27,14 +27,14 @@ namespace Multicriteria_model
         /// Указание нижних границ критериев
         /// </summary>
         /// <returns>Список товаров</returns>
-        public List<Product> Run()
+        public Product[] Run()
         {
-            List<Product> productList = _products;
-            for (byte i = 0; i < _criteria.Count; i++)
+            Product[] productList = _products;
+            for (byte i = 0; i < _criteria.Length; i++)
             {
                 try
                 {
-                    productList = productList.FindAll(_criteria.ElementAt(i).Key, _criteria.ElementAt(i).Value);
+                    productList = productList.FindAllWithBorder(_criteria[i]);
                 }
                 catch (Exception ex)
                 {

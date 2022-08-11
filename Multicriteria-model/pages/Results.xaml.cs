@@ -12,7 +12,7 @@ namespace Multicriteria_model
         /// Выводит результат на форму
         /// </summary>
         /// <param name="results">Список результатов каждого способа решения</param>
-        public Results(List<string> results)
+        public Results(string[] results)
         {
             InitializeComponent();
             resultLex.Text = results[0] == "" ? error : $"\n{results[0]}";

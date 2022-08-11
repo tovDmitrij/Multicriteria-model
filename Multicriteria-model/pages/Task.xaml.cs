@@ -13,6 +13,7 @@ namespace Multicriteria_model
         private void ProductTypeChanged(object sender, SelectionChangedEventArgs e)
         {
             Server.Name = serverName.Text;
+            Server.Database = dbName.Text;
             string productType = (this.productType.SelectedItem as ComboBoxItem).Uid;
             criteria.Navigate(new Criteria(this, productType));
         }

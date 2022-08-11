@@ -4,7 +4,7 @@ namespace Multicriteria_model
     /// <summary>
     /// Характеристика товара
     /// </summary>
-    public sealed class Characteristic
+    public struct Characteristic
     {
         private readonly string _name;
         private readonly dynamic _value;

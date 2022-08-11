@@ -24,11 +24,11 @@ namespace Multicriteria_model
         /// </summary>
         /// <param name="name">Наименование критерия</param>
         /// <param name="value">Значение критерия</param>
-        public CriteriaElement(string name, string value)
+        public CriteriaElement(string name, dynamic value)
         {
             InitializeComponent();
+            criteriaUpperOrLower.Content = Convert.ToInt32(value) >= 0 ? "Не меньше" : "Не больше";
             criteriaName.Content = name;
-            criteriaValue.Text = value;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 namespace Multicriteria_model
 {
@@ -13,34 +12,29 @@ namespace Multicriteria_model
         /// </summary>
         public static string Name { get; set; }
         /// <summary>
+        /// Наименование БД
+        /// </summary>
+        public static string Database { get; set; }
+        /// <summary>
         /// Подключение к БД и получение из него товаров
         /// </summary>
         /// <param name="productType">Тип товара</param>
         /// <returns>Список товаров</returns>
-        public static List<Product> GetProducts(string productType)
+        public static Product[] GetProducts(string productType)
         {
             #region Подключение к БД
-
-            string DataBase = "DB_Goods";
-            if (Name == "" || Name == null)
-            {
-                throw new ArgumentNullException(nameof(Name), 
-                    "Наименование сервера пустое!");
-            }
             SqlConnection sqlConnection;
             try
             {
-                sqlConnection = new SqlConnection(@$"Data Source={Name};Initial Catalog={DataBase};Integrated Security=True");
+                sqlConnection = new SqlConnection(@$"Data Source={Name};Initial Catalog={Database};Integrated Security=True");
                 sqlConnection.Open();
             }
             catch
             {
                 throw new System.Exception($"Сервер с наименованием {Name} не найден!");
             }
-
             #endregion
             #region Изъятие из БД записей
-
             SqlDataReader reader;
             string sql = $"select* from {productType}";
             try
@@ -52,10 +46,8 @@ namespace Multicriteria_model
             {
                 throw new System.Exception($"Неправильно составлен SQL-запрос!\n{sql}");
             }
-
             #endregion
             #region Преобразование записей в список товаров
-
             List<Product> productList = new();
             while (reader.Read())
             {
@@ -73,10 +65,9 @@ namespace Multicriteria_model
                         break;
                     }
                 }
-                productList.Add(new Product(characteristics));
+                productList.Add(new Product(characteristics.ToArray()));
             }
-            return productList;
-
+            return productList.ToArray();
             #endregion
         }
     }

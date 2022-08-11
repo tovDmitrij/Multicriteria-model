@@ -8,14 +8,14 @@ namespace Multicriteria_model
     /// </summary>
     internal sealed class GeneralizedCriterion
     {
-        private readonly List<Product> _products;
-        private readonly SortedDictionary<Characteristic, double> _weights;
+        private readonly Product[] _products;
+        private readonly Characteristic[] _weights;
         /// <summary>
         /// Обобщённый критерий
         /// </summary>
         /// <param name="products">Список товаров</param>
         /// <param name="weights">Список весов критериев</param>
-        public GeneralizedCriterion(List<Product> products, SortedDictionary<Characteristic, double> weights)
+        public GeneralizedCriterion(Product[] products, Characteristic[] weights)
         {
             _products = products ?? throw new ArgumentNullException(nameof(products),
                 "Ошибка в обобщённом критерии:\nОтсутствует список товаров!");
@@ -26,7 +26,7 @@ namespace Multicriteria_model
         /// Обобщённый критерий
         /// </summary>
         /// <returns>Список товаров</returns>
-        public List<Product> Run()
+        public Product[] Run()
         {
             double[] summ = GenCriterion();
             List<Product> newProductList = new();
@@ -37,25 +37,25 @@ namespace Multicriteria_model
                     newProductList.Add(_products[i]);
                 }
             }
-            return newProductList;
+            return newProductList.ToArray();
         }
         private double[] GenCriterion()
         {
-            double[] summ = new double[_products.Count];
-            for(int i = 0; i < _products.Count; i++)
+            double[] summ = new double[_products.Length];
+            for (int i = 0; i < _products.Length; i++)
             {
-                for (int j = 0; j < _weights.Count; j++)
+                for (int j = 0; j < _weights.Length; j++)
                 {
-                    summ[i] += Calculate(_weights.ElementAt(j).Key, _products, _products[i]) * _weights.ElementAt(j).Value;
+                    summ[i] += Calculate(_weights[j]) * _weights.ElementAt(j).Value;
                 }
             }
             return summ;
         }
-        private double Calculate(Characteristic currentCriteria, List<Product> productList, Product currentProduct)
+        private double Calculate(Characteristic currentCriteria)
         {
-            double maxValue = productList.Max(
-                productY => productY.Characteristics.Find(
-                    criteriaY => criteriaY.Name == currentCriteria.Name).Value);
+            double maxValue = _products.Max(
+                productY => Array.Find(
+                    productY.Characteristics, criteriaY => criteriaY.Name == currentCriteria.Name).Value);
             return currentCriteria.Value / maxValue;
         }
     }

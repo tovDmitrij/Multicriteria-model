@@ -3,13 +3,23 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Multicriteria_model.pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Criteria">
     <Grid>
-        <StackPanel>
-            <ListBox x:Name="criteriaListBox"/>
-        </StackPanel>
+        <DockPanel LastChildFill="False">
+            <ScrollViewer DockPanel.Dock="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <ListBox HorizontalContentAlignment="Center" x:Name="criteriaListBox">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </ScrollViewer>
+            <Border DockPanel.Dock="Top" Padding="10,10,10,10">
+                <Button Background="#FF003238" MaxWidth="150" Content="Подтвердить" Cursor="Hand" Click="Run"/>
+            </Border>
+        </DockPanel>
     </Grid>
 </Page>

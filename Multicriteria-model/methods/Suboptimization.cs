@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
+﻿using System;
 namespace Multicriteria_model
 {
     /// <summary>
@@ -8,8 +6,8 @@ namespace Multicriteria_model
     /// </summary>
     internal sealed class Suboptimization
     {
-        private readonly List<Product> _products;
-        private readonly SortedDictionary<Characteristic, double> _criteria;
+        private readonly Product[] _products;
+        private readonly Characteristic[] _criteria;
         private readonly Characteristic _mainCriterion;
         /// <summary>
         /// Субоптимизация
@@ -17,12 +15,11 @@ namespace Multicriteria_model
         /// <param name="products">Список товаров</param>
         /// <param name="mainCriterion">Главный критерий</param>
         /// <param name="criteria">Список критериев и их нижние границы</param>
-        public Suboptimization(List<Product> products, Characteristic mainCriterion, SortedDictionary<Characteristic, double> criteria)
+        public Suboptimization(Product[] products, Characteristic mainCriterion, Characteristic[] criteria)
         {
             _products = products ?? throw new ArgumentNullException(nameof(products),
                 "Ошибка в субоптимизации:\nОтсутствует список товаров!");
-            _mainCriterion = mainCriterion ?? throw new ArgumentNullException(nameof(mainCriterion),
-                "Ошибка в субоптимизации:\nНе был задан главный критерий!");
+            _mainCriterion = mainCriterion;
             _criteria = criteria ?? throw new ArgumentNullException(nameof(criteria),
                 "Ошибка в субоптимизации:\nОтсутствует список критериев!");
         }
@@ -30,21 +27,21 @@ namespace Multicriteria_model
         /// Субоптимизация
         /// </summary>
         /// <returns>Список товаров</returns>
-        public List<Product> Run()
+        public Product[] Run()
         {
-            List<Product> productList = _products;
-            for (byte i = 0; i < _criteria.Count; i++)
+            Product[] productList = _products;
+            for (byte i = 0; i < _criteria.Length; i++)
             {
                 try
                 {
-                    productList = productList.FindAll(_criteria.ElementAt(i).Key, _criteria.ElementAt(i).Value);
+                    productList = productList.FindAllWithBorder(_criteria[i]);
                 }
                 catch (Exception ex)
                 {
                     throw new Exception($"Ошибка в субоптимизации:\n{ex.Message}");
                 }
             }
-            return productList.FindAll(_mainCriterion);
+            return productList.FindAllWithCriteria(_mainCriterion);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Multicriteria_model
     /// </summary>
     internal sealed class Lexicographic
     {
-        private readonly List<Product> _products;
+        private readonly Product[] _products;
         private readonly SortedDictionary<int, Characteristic> _criteria;
         /// <summary>
         /// Лексикографическая оптимизация
@@ -15,7 +15,7 @@ namespace Multicriteria_model
         /// <param name="products">Список товаров</param>
         /// <param name="criteria">Список критериев и их порядок</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public Lexicographic(List<Product> products, SortedDictionary<int, Characteristic> criteria)
+        public Lexicographic(Product[] products, SortedDictionary<int, Characteristic> criteria)
         {
             _products = products ?? throw new ArgumentNullException(nameof(products),
                 "Ошибка в лексикографической оптимизации:\nОтсутствует список товаров!");
@@ -26,14 +26,14 @@ namespace Multicriteria_model
         /// Лексикографическая оптимизация
         /// </summary>
         /// <returns>Список товаров</returns>
-        public List<Product> Run()
+        public Product[] Run()
         {
-            List<Product> productList = _products;
+            Product[] productList = _products;
             for (int i = 1; i <= _criteria.Count; i++)
             {
                 try
                 {
-                    productList = productList.FindAll(_criteria[i]);
+                    productList = productList.FindAllWithCriteria(_criteria[i]);
                 }
                 catch (Exception ex)
                 {

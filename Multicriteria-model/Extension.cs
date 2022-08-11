@@ -6,19 +6,20 @@ namespace Multicriteria_model
     public static class Extensions
     {
         /// <summary>
-        /// Возвращает список товаров
+        /// Фильтрация списка товаров по текущему критерию
         /// </summary>
         /// <param name="productList">Список товаров</param>
         /// <param name="currentCriteria">Текущий критерий</param>
-        public static List<Product> FindAll(this List<Product> productList, Characteristic currentCriteria)
+        /// <returns>Список товаров</returns>
+        public static Product[] FindAllWithCriteria(this Product[] productList, Characteristic currentCriteria)
         {
             try
             {
-                return productList.FindAll(productX => 
+                return Array.FindAll(productList, productX => 
                     productX.Characteristics.Contains(currentCriteria) &&
-                    productX.Characteristics.Find(criteriaX => criteriaX.Name == currentCriteria.Name).Value ==
+                    Array.Find(productX.Characteristics, criteriaX => criteriaX.Name == currentCriteria.Name).Value ==
                     productList.Max(productY =>
-                        productY.Characteristics.Find(criteriaY => criteriaY.Name == currentCriteria.Name).Value));
+                        Array.Find(productY.Characteristics, criteriaY => criteriaY.Name == currentCriteria.Name).Value));
             }
             catch (Exception ex)
             {
@@ -26,23 +27,41 @@ namespace Multicriteria_model
             }
         }
         /// <summary>
-        /// Возвращает список товаров
+        /// Фильтрация списка товаров по текущему критерию и его границе
         /// </summary>
         /// <param name="productList">Список товаров</param>
         /// <param name="currentCriteria">Текущий критерий</param>
-        /// <param name="border">Нижняя граница текущего критерия</param>
-        public static List<Product> FindAll(this List<Product> productList, Characteristic currentCriteria, double border)
+        /// <param name="border">Граница критерия</param>
+        /// <returns>Список товаров</returns>
+        public static Product[] FindAllWithBorder(this Product[] productList, Characteristic currentCriteria)
         {
             try
             {
-                return productList.FindAll(productX =>
+                return Array.FindAll(productList, productX =>
                     productX.Characteristics.Contains(currentCriteria) &&
-                    productX.Characteristics.Find(criteriaX => criteriaX.Name == currentCriteria.Name).Value >= border);
+                    Array.Find(productX.Characteristics, criteriaX => criteriaX.Name == currentCriteria.Name).Value >= currentCriteria.Value);
             }
             catch (Exception ex)
             {
                 throw new Exception($"Ошибка с фильтрацией по границе:\n{ex.Message}");
             }
+        }
+        /// <summary>
+        /// Нахождение характеристики в текущем товаре
+        /// </summary>
+        /// <param name="characteristicList">Список характеристик товара</param>
+        /// <param name="currentCharacteristic">Текущая характеристика</param>
+        /// <returns></returns>
+        public static bool Contains(this IEnumerable<Characteristic> characteristicList, Characteristic currentCharacteristic)
+        {
+            foreach (Characteristic characteristic in characteristicList)
+            {
+                if (characteristic.Name == currentCharacteristic.Name)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
