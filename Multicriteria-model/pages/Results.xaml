@@ -11,15 +11,13 @@
       TextOptions.TextRenderingMode="Auto"
       FontFamily="{DynamicResource MaterialDesignFont}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="500" MaxWidth="500"
       Title="Page_Results">
     <Grid Background="Transparent">
-        <ScrollViewer Background="#FF003238" Foreground="#FF004048" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">
-            <DockPanel LastChildFill="True">
+        <ScrollViewer Background="#FF003238" Foreground="#FF004048" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <DockPanel LastChildFill="False">
                 <Label DockPanel.Dock="Top" Background="#FF00262B" Foreground="#DDD2D2D2" Margin="10px" HorizontalContentAlignment="Center" FontSize="20">РЕЗУЛЬТАТ</Label>
-                
-                <!--Лексикографическая оптимизация-->
-                
+                <!--Лексикографическая оптимизация-->  
                 <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="Лексикографическая оптимизация" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
                     <Label.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -37,9 +35,7 @@
                     </Label.Background>
                 </Label>
                 <TextBox DockPanel.Dock="Top" IsReadOnly="True" x:Name="resultLex" Foreground="#DDD2D2D2" FontSize="16" Cursor="Arrow"></TextBox>
-               
                 <!--Субоптимизация-->
-                
                 <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="Субоптимизация" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
                     <Label.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -57,9 +53,7 @@
                     </Label.Background>
                 </Label>
                 <TextBox DockPanel.Dock="Top" IsReadOnly="True" x:Name="resultSub" Foreground="#DDD2D2D2" FontSize="16" Cursor="Arrow"></TextBox>
-                
                 <!--Построение обобщенного критерия-->
-               
                 <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="Построение обобщенного критерия" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
                     <Label.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -77,9 +71,7 @@
                     </Label.Background>
                 </Label>
                 <TextBox DockPanel.Dock="Top" IsReadOnly="True" x:Name="resultGenCr" Foreground="#DDD2D2D2" FontSize="16" Cursor="Arrow"></TextBox>
-               
                 <!--Указание нижних границ критериев-->
-                
                 <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="Указание нижних границ критериев" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
                     <Label.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -97,9 +89,7 @@
                     </Label.Background>
                 </Label>
                 <TextBox DockPanel.Dock="Top" IsReadOnly="True" x:Name="resultLowBorCr" Foreground="#DDD2D2D2" FontSize="16" Cursor="Arrow"></TextBox>
-                
                 <!--Формирование множества Парето-->
-                
                 <Label DockPanel.Dock="Top" Margin="0,5,0,5" Content="Формирование множества Парето" HorizontalContentAlignment="Center" Width="auto" FontSize="18" VerticalAlignment="Center" Foreground="#DDD2D2D2">
                     <Label.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

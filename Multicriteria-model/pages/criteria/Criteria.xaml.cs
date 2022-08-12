@@ -55,11 +55,13 @@ namespace Multicriteria_model
         private void Run(object sender, System.Windows.RoutedEventArgs e)
         {
             string[] results = new string[5];
+
             #region Лексикографическая оптимизация
             SortedDictionary<int, Characteristic> lexOptim = new();
             foreach (CriteriaElement criteria in criteriaListBox.Items)
             {
-                lexOptim.Add((int)criteria.Priority, new Characteristic(criteria.Name, Convert.ToDouble(criteria.Value)));
+                double value = criteria.Upper ? Convert.ToDouble(criteria.Value) : Convert.ToDouble(criteria.Value) * -1.0;
+                lexOptim.Add((int)criteria.Priority, new Characteristic(criteria.Name, value));
             }
             Lexicographic lexicographic = new(_productList, lexOptim);
             foreach (var item in lexicographic.Run())
@@ -67,32 +69,32 @@ namespace Multicriteria_model
                 results[0] += item.ToString();
             }
             #endregion
+
             #region Субоптимизация
             Characteristic[] subOptim = new Characteristic[criteriaListBox.Items.Count - 1];
             Characteristic mainCriterion = new();
             int index = 0;
             foreach (CriteriaElement criteria in criteriaListBox.Items)
             {
-                if (index >= subOptim.Length)
-                {
-                    break;
-                }
+                double value = criteria.Upper ? Convert.ToDouble(criteria.Value) : Convert.ToDouble(criteria.Value) * -1.0;
                 if (criteria.Priority == 1)
                 {
-                    mainCriterion = new Characteristic(criteria.Name, Convert.ToDouble(criteria.Value));
+                    mainCriterion = new Characteristic(criteria.Name, value);
                 }
                 else
                 {
-                    subOptim[index] = new Characteristic(criteria.Name, Convert.ToDouble(criteria.Value));
+                    subOptim[index] = new Characteristic(criteria.Name, value);
                     index++;
                 }
             }
             Suboptimization suboptimization = new(_productList, mainCriterion, subOptim);
+            var z = suboptimization.Run();
             foreach (var item in suboptimization.Run())
             {
                 results[1] += item.ToString();
             }
             #endregion
+
             #region Указание нижних границ критериев
             Characteristic[] lcbOptim = new Characteristic[subOptim.Length + 1];
             for (int i = 0; i < subOptim.Length; i++)
@@ -106,6 +108,7 @@ namespace Multicriteria_model
                 results[2] += item.ToString();
             }
             #endregion
+
             #region Обобщённый критерий
             GeneralizedCriterion generalizedCriterion = new(_productList, CriteriaWithWeights(lexOptim));
             foreach (var item in generalizedCriterion.Run())
@@ -113,6 +116,7 @@ namespace Multicriteria_model
                 results[3] += item.ToString();
             }
             #endregion
+
             #region Формирование множества Парето
             ParetoOptimum paretoOptimum = new(_productList);
             foreach (var item in paretoOptimum.Run())
@@ -120,13 +124,14 @@ namespace Multicriteria_model
                 results[4] += item.ToString();
             }
             #endregion
+
             _parentPage.results.Navigate(new Results(results));
         }
         /// <summary>
-        /// Список критериев и их веса
+        /// Расчёт весов для текущего списка критериев
         /// </summary>
-        /// <param name="criteriaList">Возвращает список критериев и их веса</param>
-        /// <returns></returns>
+        /// <param name="criteriaList">Словарь с ключом - порядком и значением - характеристикой</param>
+        /// <returns>Cписок критериев и их веса</returns>
         private Characteristic[] CriteriaWithWeights(SortedDictionary<int, Characteristic> criteriaList)
         {
             Characteristic[] criteriaWeights = new Characteristic[criteriaList.Count];

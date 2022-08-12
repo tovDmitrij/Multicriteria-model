@@ -46,17 +46,17 @@ namespace Multicriteria_model
             {
                 for (int j = 0; j < _weights.Length; j++)
                 {
-                    summ[i] += Calculate(_weights[j]) * _weights.ElementAt(j).Value;
+                    summ[i] += Calculate(_weights[j], _products[i]) * _weights[j].Value;
                 }
             }
             return summ;
         }
-        private double Calculate(Characteristic currentCriteria)
+        private double Calculate(Characteristic currentCriteria, Product currentProduct)
         {
             double maxValue = _products.Max(
                 productY => Array.Find(
                     productY.Characteristics, criteriaY => criteriaY.Name == currentCriteria.Name).Value);
-            return currentCriteria.Value / maxValue;
+            return Array.Find(currentProduct.Characteristics, characterX => characterX.Name == currentCriteria.Name).Value / maxValue;
         }
     }
 }

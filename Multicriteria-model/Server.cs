@@ -26,14 +26,19 @@ namespace Multicriteria_model
             SqlConnection sqlConnection;
             try
             {
+                if (Name == "" || Database == "")
+                {
+                    throw new System.Exception();
+                }
                 sqlConnection = new SqlConnection(@$"Data Source={Name};Initial Catalog={Database};Integrated Security=True");
                 sqlConnection.Open();
             }
             catch
             {
-                throw new System.Exception($"Сервер с наименованием {Name} не найден!");
+                throw new System.Exception("Ошибка при подключении к серверу:\nОтсутствует сервер или БД с таким наименованием!");
             }
             #endregion
+
             #region Изъятие из БД записей
             SqlDataReader reader;
             string sql = $"select* from {productType}";
@@ -44,9 +49,10 @@ namespace Multicriteria_model
             }
             catch
             {
-                throw new System.Exception($"Неправильно составлен SQL-запрос!\n{sql}");
+                throw new System.Exception($"Ошибка при подключении к серверу:\nНеправильно составлен SQL-запрос:\n{sql}");
             }
             #endregion
+            
             #region Преобразование записей в список товаров
             List<Product> productList = new();
             while (reader.Read())

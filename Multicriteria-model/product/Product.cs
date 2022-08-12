@@ -29,7 +29,7 @@ namespace Multicriteria_model
             string result = "";
             foreach (var currentChar in _characteristics)
             {
-                result += $"{currentChar.Name}: {currentChar.Value};\n";
+                result += $"{currentChar.Name}: {(currentChar.Value is IFormattable ? Math.Abs(currentChar.Value) : currentChar.Value)};\n";
             }
             return result;
         }

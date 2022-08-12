@@ -15,11 +15,11 @@ namespace Multicriteria_model
         public Results(string[] results)
         {
             InitializeComponent();
-            resultLex.Text = results[0] == "" ? error : $"\n{results[0]}";
-            resultSub.Text = results[1] == "" ? error : $"\n{results[1]}";
-            resultLowBorCr.Text = results[2] == "" ? error : $"\n{results[2]}";
-            resultGenCr.Text = results[3] == "" ? error : $"\n{results[3]}";
-            resultParOpt.Text = results[4] == "" ? error : $"\n{results[4]}";
+            resultLex.Text = results[0] == null ? error : $"\n{results[0]}";
+            resultSub.Text = results[1] == null ? error : $"\n{results[1]}";
+            resultLowBorCr.Text = results[2] == null ? error : $"\n{results[2]}";
+            resultGenCr.Text = results[3] == null ? error : $"\n{results[3]}";
+            resultParOpt.Text = results[4] == null ? error : $"\n{results[4]}";
         }
     }
 }
