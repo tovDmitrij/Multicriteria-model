@@ -22,9 +22,8 @@
 ### :earth_asia: Языки
 ```
 C#
-SQL
 Python
-XAML
+SQL
 ```
 ### :desktop_computer: Интерфейс
 ```
