@@ -35,7 +35,6 @@ MSSQL
 ```
 ### :scroll: Прочее
 ```
-LINQ
 Selenium
 Beautiful Soup
 Material Design
